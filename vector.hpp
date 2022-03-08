@@ -10,17 +10,19 @@ namespace ft
     template <typename T, typename Allocator = std::allocator<T> >
     class vector
     {
-
         public:
             /*Member types of original vector https://www.cplusplus.com/reference/vector/vector/?kw=vector*/
+            /*vector header*/
             typedef T value_type;
             typedef Allocator allocator_type;
-            typedef typename allocator_type::reference reference;
-            typedef typename allocator_type::const_reference const_reference;
-            typedef typename allocator_type::pointer pointer;
-            typedef typename allocator_type::const_pointer const_pointer;
-            typedef typename allocator_type::size_type size_type;
-
+            typedef value_type & reference;
+            typedef value_type const & const_reference;
+            typedef value_type * pointer;
+            typedef value_type const * const_pointer;
+            typedef size_t size_type;
+            /**/
+            //typedef random_access_iteretor<value_type> iteretor;
+    
             /*-------------------------------------------------------------------Constructors--------------------------------------------------------------------*/
 
             /*A constructor that can be called with a single parameter can serve a secondary purpose, of implicitly "converting" the parameter.
@@ -86,6 +88,16 @@ namespace ft
                 _capacity = reserve_value;
             }
 
+            /*Resize the vector*/
+            void resize(size_type new_size, value_type val = value_type())
+            {
+                while (new_size > _size)
+                    push_back(val);
+                while (new_size < _size)
+                    pop_back();
+            }
+            
+            /*@ret capacity of vector*/
             size_type capacity() const
             {return _capacity;}
 
@@ -116,7 +128,6 @@ namespace ft
             size_type _size;
             pointer _vector;
             size_type _capacity;
-       
     };
 }
 
