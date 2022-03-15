@@ -3,12 +3,12 @@
 #include <iostream>
 
 #define SIZE 10
-
+#define TYPE int
 using namespace std;
 int main()
 {
-    vector<int> vec;
-    vector<int>::iterator it;
+    vector<TYPE> vec;
+    vector<TYPE>::iterator it;
 
     std::cout << "*******************************Push Back Test***********************************\n";
     for (size_t i = 0; i < SIZE; ++i)
@@ -37,7 +37,7 @@ int main()
     std::cout << "******************************* Copy constructor test ***********************************\n";
     for (size_t i = 0; i < SIZE; ++i)
         vec.push_back(i);
-    vector<int> vec2;
+    vector<TYPE> vec2;
     vec2 = vec;
     std::cout << "________________________________normal________________________________\n";
 
@@ -50,7 +50,7 @@ int main()
     
     std::cout << "******************************* Copy Contructor overload ***********************************\n";
 
-    vector<int> vec3(vec2);
+    vector<TYPE> vec3(vec2);
     std::cout << "________________________________normal________________________________\n";
 
     for(unsigned i = 0; i < vec2.size(); ++i)
@@ -70,7 +70,7 @@ int main()
     *it = 10;
     std::cout << *vec.end()  << std::endl;
     std::cout << "******************************* rbegin  rend test ***********************************\n";
-    vector<int>::reverse_iterator rit;
+    vector<TYPE>::reverse_iterator rit;
     rit = vec.rbegin();
     *rit = 20;
     for (rit = vec.rbegin(); rit != vec.rend(); rit++)
