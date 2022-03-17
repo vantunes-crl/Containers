@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <memory>
+#include "random_acess_iterator.hpp"
 
 namespace ft
 {   
@@ -21,8 +22,8 @@ namespace ft
             typedef value_type const * const_pointer;
             typedef size_t size_type;
             /**/
-            //typedef random_access_iteretor<value_type> iteretor;
-    
+            typedef random_access_iterator<value_type> iterator;
+            typedef random_access_iterator<const value_type> const_iterator;
             /*-------------------------------------------------------------------Constructors--------------------------------------------------------------------*/
 
             /*A constructor that can be called with a single parameter can serve a secondary purpose, of implicitly "converting" the parameter.
@@ -123,6 +124,16 @@ namespace ft
             /*@ret const referense to vector pos*/
             const_reference operator[] (size_type i) const
             {return _vector[i];}
+
+
+            /*---------------------------------------------------------------Iterators----------------------------------------------------------------------------------*/
+
+            iterator begin() {return _vector;}
+            const_iterator begin()  const {return _vector;}
+
+            const_iterator  end() const {return _vector + _size;}
+            iterator end() {return _vector + _size;}
+
     private:
             allocator_type _alloc;
             size_type _size;

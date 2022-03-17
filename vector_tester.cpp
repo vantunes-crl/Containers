@@ -82,13 +82,14 @@ int main()
     std::cout << "******************************* Capacity tests ***********************************\n";
     std::cout << vec.size() << "Size "<< std::endl;
     std::cout << vec.max_size() << " Max_size " << std::endl;
-    vec.resize(100);
-    std::cout << vec.capacity() << " Capacity after resize 100\n";
-    std::cout << vec.size() << " Size after resize 100\n";
+    vec.resize(20);
+    std::cout << vec.capacity() << " Capacity after resize 20\n";
+    std::cout << vec.size() << " Size after resize 20\n";
+    for (vector<TYPE>::iterator i = vec.begin(); i != vec.end(); ++i)
+        std::cout << *i << "\n";
     std::cout << vec.empty() << " Empty\n";
     vec.reserve(200);
     std::cout << vec.capacity() << " Capacity after reserve 200\n";
     vec.capacity();
-
 
 }

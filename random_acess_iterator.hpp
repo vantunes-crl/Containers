@@ -38,7 +38,7 @@ namespace ft
             {return _container_ptr == obj2._container_ptr;}
 
             bool operator !=(const random_access_iterator &obj2) const
-            {return _container_ptr != obj2._continer_ptr;}
+            {return !(*this == obj2);}
 
             pointer operator->() const
             {return _container_ptr;}
@@ -101,10 +101,11 @@ namespace ft
             reference operator[](difference_type n) const
             {return _container_ptr[n];}
 
+        ~random_access_iterator() {}
         private:
             pointer _container_ptr;
 
-            ~random_access_iterator() {}
+            
     };
 }
 

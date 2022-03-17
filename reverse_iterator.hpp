@@ -9,11 +9,11 @@ namespace ft
         public:
             /* iterator Member types Header */
             typedef T iterator_type;
-            typedef typename iterator_traits<T>::iterator_category iterator_category;
-            typedef typename iterator_traits<T>::value_type value_type;
-            typedef typename iterator_traits<T>::difference_type difference_type;
-            typedef typename iterator_traits<T>::pointer pointer;
-            typedef typename iterator_traits<T>::reference reference;
+            typedef typename std::iterator_traits<T>::iterator_category iterator_category;
+            typedef typename std::iterator_traits<T>::value_type value_type;
+            typedef typename std::iterator_traits<T>::difference_type difference_type;
+            typedef typename std::iterator_traits<T>::pointer pointer;
+            typedef typename std::iterator_traits<T>::reference reference;
 
             /* Default Contructors pointing to nullptr */
             reverse_iterator():_container_ptr(nullptr) {}
