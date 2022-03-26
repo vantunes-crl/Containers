@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include "random_acess_iterator.hpp"
+#include "reverse_iterator.hpp"
 
 namespace ft
 {   
@@ -24,6 +25,8 @@ namespace ft
             /**/
             typedef random_access_iterator<value_type> iterator;
             typedef random_access_iterator<const value_type> const_iterator;
+            typedef reverse_iterator<const value_type> const_reverse_iterator;
+            typedef reverse_iterator<value_type> reverse_iterator;
             /*-------------------------------------------------------------------Constructors--------------------------------------------------------------------*/
 
             /*A constructor that can be called with a single parameter can serve a secondary purpose, of implicitly "converting" the parameter.
@@ -130,6 +133,12 @@ namespace ft
 
             iterator begin() {return _vector;}
             const_iterator begin()  const {return _vector;}
+
+            reverse_iterator rbegin() {return _vector + _size - 1;}
+            const_reverse_iterator rbegin() const {return _vector + _size - 1;}
+
+            const_reverse_iterator  rend() const {return _vector - 1;}
+            reverse_iterator rend() {return _vector - 1;}
 
             const_iterator  end() const {return _vector + _size;}
             iterator end() {return _vector + _size;}
