@@ -1,0 +1,11 @@
+8 after ++*
+8 after *++
+8 after --*
+8 after *--
+7 after += 2
+9 after -= 2
+1 operator < 
+0 operator > 
+0 operator >= 
+1 operator <= 
+5 operator []
