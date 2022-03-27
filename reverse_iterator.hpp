@@ -53,7 +53,7 @@ namespace ft
             reverse_iterator &operator++(int)
             {
                 static reverse_iterator temp = *this;
-                --*this;
+                ++*this;
                 return (temp);
             }
 
@@ -65,7 +65,7 @@ namespace ft
             reverse_iterator &operator--(int)
             {
                 static reverse_iterator temp  = *this;
-                ++*this;
+                --*this;
                 return (temp);
             }
             
@@ -86,19 +86,19 @@ namespace ft
             {return _container_ptr -= n;}
 
             bool operator<(reverse_iterator &obj2) const
-            {return _container_ptr < obj2._container_ptr;}
-
-            bool operator>(reverse_iterator &obj2) const
             {return _container_ptr > obj2._container_ptr;}
 
-            bool operator<=(reverse_iterator &obj2) const
-            {return _container_ptr <= obj2._container_ptr;}
+            bool operator>(reverse_iterator &obj2) const
+            {return _container_ptr < obj2._container_ptr;}
 
-            bool operator>=(reverse_iterator &obj2) const
+            bool operator<=(reverse_iterator &obj2) const
             {return _container_ptr >= obj2._container_ptr;}
 
+            bool operator>=(reverse_iterator &obj2) const
+            {return _container_ptr <= obj2._container_ptr;}
+
             reference operator[](difference_type n) const
-            {return _container_ptr[n];}
+            {return _container_ptr[-n];}
 
          ~reverse_iterator() {}
         private:

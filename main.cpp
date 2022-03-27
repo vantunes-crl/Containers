@@ -5,8 +5,8 @@ using namespace ft;
 
 int main()
 {
-    //vector<int>::reverse_iterator it;
-    vector<int>::iterator it;
+    vector<int>::reverse_iterator it;
+    //vector<int>::iterator it;
     vector<int> vec;
 
     for (int i = 0; i < 20; ++i)
@@ -21,14 +21,14 @@ int main()
     //     std::cout << *it << std::endl;
 
 
-    // it = vec.rbegin();
-    // std::cout << *it << "rbegin \n";
+    it = vec.rbegin();
+    std::cout << *it << "rbegin \n";
 
-    // it = vec.rend();
-    // std::cout << *it << "rend\n";
+    it = vec.rend();
+    std::cout << *it << "rend\n";
 
 
-    for (it = vec.begin(); it != vec.end(); ++it)
+    for (it = vec.rbegin(); it != vec.rend(); ++it)
         std::cout << *it << std::endl;
 
 
