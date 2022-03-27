@@ -131,17 +131,21 @@ namespace ft
 
             /*---------------------------------------------------------------Iterators----------------------------------------------------------------------------------*/
 
+            /* Normal iterator */
             iterator begin() {return _vector;}
             const_iterator begin()  const {return _vector;}
 
+            const_iterator  end() const {return _vector + _size;}
+            iterator end() {return _vector + _size;}
+
+            /* reverse iterators */
             reverse_iterator rbegin() {return _vector + _size - 1;}
             const_reverse_iterator rbegin() const {return _vector + _size - 1;}
 
             const_reverse_iterator  rend() const {return _vector - 1;}
             reverse_iterator rend() {return _vector - 1;}
 
-            const_iterator  end() const {return _vector + _size;}
-            iterator end() {return _vector + _size;}
+            
 
     private:
             allocator_type _alloc;

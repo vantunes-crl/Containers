@@ -53,9 +53,9 @@ namespace ft
             //Posfix increment create a copy, increment and return, @Tip Posfix uses more memory then Prefix
             random_access_iterator &operator++(int)
             {
-                random_access_iterator old(*this);
-                ++(*this);
-                return (old);
+                static random_access_iterator temp = *this;
+                ++*this;
+                return (temp);
             }
 
             //Prefix decrement
@@ -65,9 +65,9 @@ namespace ft
             //Posfix increment create a copy, increment and return, @Tip Posfix uses more memory then Prefix
             random_access_iterator &operator--(int)
             {
-                random_access_iterator old(*this);
-                --(*this);
-                return (old);
+                static random_access_iterator<T> temp = *this;
+                --*this;
+                return (temp);
             }
             
             /*std::ptrdiff_t is used for pointer arithmetic and array indexing, if negative values are possible.
