@@ -145,7 +145,25 @@ namespace ft
             const_reverse_iterator  rend() const {return _vector - 1;}
             reverse_iterator rend() {return _vector - 1;}
 
-            
+            /*---------------------------------------------------------------elementor access-------------------------------------------------------------------------------*/
+
+            reference at(size_type n)
+            {return _vector[n];}
+
+            const_reference at(size_type n) const
+            {return _vector[n];}
+
+            reference front()
+            {return *_vector;}
+
+            const_reference front() const
+            {return *_vector;}
+
+            reference back()
+            {return *(_vector + _size - 1);}
+
+            const_reference back() const
+            {return *(_vector + _size - 1);}
 
     private:
             allocator_type _alloc;

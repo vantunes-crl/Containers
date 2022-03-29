@@ -2,13 +2,21 @@
 #include "../random_acess_iterator.hpp"
 #include "../reverse_iterator.hpp"
 #include "../vector.hpp"
-
-using namespace ft;
+#include <vector>
 
 template <class T>
-void print(vector<T> &vec)
+void print(ft::vector<T> &vec)
 {    
-    typename vector<T>::iterator it;
+    typename ft::vector<T>::iterator it;
+
+    for (it = vec.begin(); it != vec.end(); ++it)
+        std::cout << *it << std::endl;
+}
+
+template <class T>
+void print(std::vector<T> &vec)
+{    
+    typename std::vector<T>::iterator it;
 
     for (it = vec.begin(); it != vec.end(); ++it)
         std::cout << *it << std::endl;

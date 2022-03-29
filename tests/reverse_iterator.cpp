@@ -30,7 +30,7 @@ int main()
     it -= 2;
     std::cout << *it << " after -= 2\n";
 
-    it2 = vec.rend() - 1;
+    it2 = vec.rend();
     std::cout << *it << " < " << *it2 << (it < it2) << " operator < \n";
     std::cout << (it > it2) << " operator > \n";
     std::cout << (it >= it2) << " operator >= \n";
