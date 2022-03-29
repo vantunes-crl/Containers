@@ -165,6 +165,27 @@ namespace ft
             const_reference back() const
             {return *(_vector + _size - 1);}
 
+            /*---------------------------------------------------------------modifier-------------------------------------------------------------------------------*/
+
+            template <class B>
+            void swap(B &a, B &b)
+            {
+                B temp = a;
+                a = b;
+                b = temp;
+            }
+
+            iterator insert(iterator position, const value_type &val)
+            {
+                value_type temp = *position;
+                *position = val;
+                push_back(val);
+                _vector[_size - 1] = temp;
+                
+                return position;
+            }
+
+
     private:
             allocator_type _alloc;
             size_type _size;
