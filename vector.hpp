@@ -177,12 +177,64 @@ namespace ft
 
             iterator insert(iterator position, const value_type &val)
             {
-                value_type temp = *position;
-                *position = val;
+                int count = 0;
+                while (position != end())
+                {
+                    position++;
+                    count++;
+                }
                 push_back(val);
-                _vector[_size - 1] = temp;
-                
-                return position;
+                int size_cpy = _size;
+                while (count--)
+                {
+                    swap(_vector[size_cpy - 2], _vector[size_cpy - 1]);
+                    size_cpy--;
+                }
+                return iterator(&_vector[size_cpy - 1]);
+            }
+
+            void insert (iterator position, size_type n, const value_type& val)
+            {
+                int count = 0;
+                while (position != end())
+                {
+                    position++;
+                    count++;
+                }
+                while (n--)
+                {
+                    push_back(val);
+                    int size_cpy = _size;
+                    int count_cpy = count;
+                    while (count_cpy--)
+                    {
+                        swap(_vector[size_cpy - 2], _vector[size_cpy - 1]);
+                        size_cpy--;
+                    }
+                }
+            }
+
+            template <class InputIterator>
+            void insert (iterator position, InputIterator first, InputIterator last)
+            {
+                int count = 0;
+                while (position != end())
+                {
+                    position++;
+                    count++;
+                }
+                while (first != last)
+                {
+                    push_back(*first);
+                    int size_cpy = _size;
+                    int count_cpy = count;
+                    while (count_cpy--)
+                    {
+                        swap(_vector[size_cpy - 2], _vector[size_cpy - 1]);
+                        size_cpy--;
+                    }
+                    first++;
+                }
             }
 
 

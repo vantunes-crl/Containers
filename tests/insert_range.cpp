@@ -6,16 +6,17 @@ using namespace ft;
 int main()
 {
     ft::vector<int> vec;
-    ft::vector<int>::iterator it;
+    ft::vector<int> vec2;
+
     int i = -1;
 
     while (++i < 10)
         vec.push_back(i);
+    i = -1;
+    while (++i < 10)
+        vec2.push_back(i);
     
-   // std::cout << vec.size() << std::endl;
-    //*vec.end() = 10;
-    //std::cout << *(vec.end() - 1) << std::endl;
     std::cout << "----------------------------------\n";
-    std::cout << *vec.insert((vec.end() - 10), 11) << "insert\n";
+    vec.insert(vec.begin(), vec2.begin(), vec2.end());
     print(vec);
 }

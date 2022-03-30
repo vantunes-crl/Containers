@@ -5,17 +5,17 @@ using namespace ft;
 
 int main()
 {
-    ft::vector<int> vec;
-    ft::vector<int>::iterator it;
-    int i = -1;
+    ft::vector<char> vec;
+    ft::vector<char>::iterator it;
+    int i = 48;
 
-    while (++i < 10)
+    while (++i < 58)
         vec.push_back(i);
     
    // std::cout << vec.size() << std::endl;
     //*vec.end() = 10;
     //std::cout << *(vec.end() - 1) << std::endl;
     std::cout << "----------------------------------\n";
-    std::cout << *vec.insert((vec.end() - 10), 11) << "insert\n";
+    vec.insert((vec.end() - 6), 10, 49);
     print(vec);
 }
