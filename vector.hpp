@@ -45,6 +45,17 @@ namespace ft
                 for (size_type i = 0; i < vector_size; ++i)
                     _alloc.construct(&_vector[i], value);
             }
+
+            /*--------------------------------------------------------------------cpy constructor----------------------------------------------------------------------*/
+            vector operator=(const vector &cpy)
+            {
+                this->~vector();
+                _vector = cpy._vector;
+                _size = cpy._size;
+                _capacity = cpy._capacity;
+                _alloc = cpy._alloc;
+                return *this;
+            }
             
             /*--------------------------------------------------------------------Functions--------------------------------------------------------------------------*/
             /*increase by 1 de size of the vector and add the value to the end*/
@@ -128,7 +139,6 @@ namespace ft
             const_reference operator[] (size_type i) const
             {return _vector[i];}
 
-
             /*---------------------------------------------------------------Iterators----------------------------------------------------------------------------------*/
 
             /* Normal iterator */
@@ -147,27 +157,33 @@ namespace ft
 
             /*---------------------------------------------------------------elementor access-------------------------------------------------------------------------------*/
 
+            /*@ret pos*/
             reference at(size_type n)
             {return _vector[n];}
 
+            /*@ret const pos*/
             const_reference at(size_type n) const
             {return _vector[n];}
 
+            /* @ret the first element of vector */
             reference front()
             {return *_vector;}
 
+            /* @ret the first const element of vector */
             const_reference front() const
             {return *_vector;}
 
+            /* @ret the last element of vector */
             reference back()
             {return *(_vector + _size - 1);}
 
+            /* @ret the last const element of vector */
             const_reference back() const
             {return *(_vector + _size - 1);}
 
             /*---------------------------------------------------------------modifier-------------------------------------------------------------------------------*/
 
-
+            /*insert a element at the iterator position, @ret a iterator to the new pos*/
             iterator insert(iterator position, const value_type &val)
             {
                 int count = 0;
@@ -186,6 +202,7 @@ namespace ft
                 return iterator(&_vector[size_cpy - 1]);
             }
 
+            /* insert n elements in the vector pos @no ret */
             void insert (iterator position, size_type n, const value_type& val)
             {
                 int count = 0;
@@ -207,6 +224,7 @@ namespace ft
                 }
             }
 
+            /* insert n elements in the vector from a range of elements from first to last */
             template <class InputIterator>
             void insert (iterator position, InputIterator first, InputIterator last)
             {
@@ -230,6 +248,7 @@ namespace ft
                 }
             }
 
+            /* erase a element in the vector and return the new pos */
             iterator erase (iterator position)
             {
                 int count = 0;
@@ -248,6 +267,7 @@ namespace ft
                 return iterator(&_vector[count_cpy]);
             }
 
+            /* erase a n of elements from the first iterator to the last */
             iterator erase (iterator first, iterator last)
             {
                 size_type range = 0;
@@ -267,8 +287,30 @@ namespace ft
                 return iterator(&_vector[pos]);
             }
 
+            /* clear the holy vector */
+            void clear()
+            {
+                while (_size > 0)
+                {
+                    pop_back();
+                    _size--;
+                }    
+            }
 
+            template <class InputIterator>
+            void assign (InputIterator first, InputIterator last)
+            {
+                clear();
+                while (first != last)
+                    push_back(*(first)++);
+            }
 
+            void assign (size_type n, const value_type &val)
+            {
+                clear();
+                while (n--)
+                    push_back(val);
+            }
 
     private:
             allocator_type _alloc;
