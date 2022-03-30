@@ -14,7 +14,6 @@ namespace ft
             typedef value_type * pointer;
             typedef value_type const * const_pointer;
             typedef std::ptrdiff_t difference_type;
-            //typedef std::random_access_iterator_tag iterator_category;
             typedef size_t size_type;
 
             /* Default Contructors pointing to nullptr */

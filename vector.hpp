@@ -167,13 +167,6 @@ namespace ft
 
             /*---------------------------------------------------------------modifier-------------------------------------------------------------------------------*/
 
-            template <class B>
-            void swap(B &a, B &b)
-            {
-                B temp = a;
-                a = b;
-                b = temp;
-            }
 
             iterator insert(iterator position, const value_type &val)
             {
@@ -237,12 +230,59 @@ namespace ft
                 }
             }
 
+            iterator erase (iterator position)
+            {
+                int count = 0;
+                while (position != begin())
+                {
+                    position--;
+                    count++;
+                }
+                int count_cpy = count;
+                while (count < _size - 1)
+                {
+                    swap(_vector[count], _vector[count + 1]);
+                    count++;
+                }
+                pop_back();
+                return iterator(&_vector[count_cpy]);
+            }
+
+            iterator erase (iterator first, iterator last)
+            {
+                size_type range = 0;
+                size_type pos = 0;
+                while (first-- != begin())
+                    pos++;
+                first = first + pos;
+                while (first++ != last)
+                    range++;
+                for (int i = range; i > 0; --i)
+                {
+                    for (int i = pos; i < _size -1; ++i)
+                        swap(_vector[i], _vector[i + 1]);
+                }
+                while (range--)
+                    pop_back();
+                return iterator(&_vector[pos]);
+            }
+
+
+
 
     private:
             allocator_type _alloc;
             size_type _size;
             pointer _vector;
             size_type _capacity;
+
+            template <class B>
+            void swap(B &a, B &b)
+            {
+                B temp = a;
+                a = b;
+                b = temp;
+            }
     };
 }
 
