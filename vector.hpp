@@ -56,6 +56,11 @@ namespace ft
                 _alloc = cpy._alloc;
                 return *this;
             }
+
+            vector(const vector &cpy)
+            {
+                *this = cpy;
+            }
             
             /*--------------------------------------------------------------------Functions--------------------------------------------------------------------------*/
             /*increase by 1 de size of the vector and add the value to the end*/
