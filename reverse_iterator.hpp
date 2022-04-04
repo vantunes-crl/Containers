@@ -1,20 +1,21 @@
 #ifndef REVERSE_ITERATOR_HPP
 #define REVERSE_ITERATOR_HPP
 
+#include "iterator_traits.hpp"
+
 namespace ft
 {
-    template <class T>
+    template <class Iterator>
     class reverse_iterator
     {
         public:
             /* iterator Member types Header */
-            typedef T value_type;
-            typedef value_type & reference;
-            typedef value_type const & const_reference;
-            typedef value_type * pointer;
-            typedef value_type const * const_pointer;
-            typedef std::ptrdiff_t difference_type;
-            typedef size_t size_type;
+            typedef Iterator	iterator_type;
+            typedef typename iterator_traits<Iterator>::iterator_category	iterator_category;
+            typedef typename iterator_traits<Iterator>::value_type value_type;
+            typedef typename iterator_traits<Iterator>::difference_type difference_type;
+            typedef typename iterator_traits<Iterator>::pointer pointer;
+            typedef typename iterator_traits<Iterator>::reference reference;
 
             /* Default Contructors pointing to nullptr */
             reverse_iterator():_container_ptr(nullptr) {}
