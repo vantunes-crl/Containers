@@ -5,9 +5,9 @@ using namespace ft;
 
 int main()
 {
-    std::vector<int>::iterator it;
-    std::vector<int>::iterator it2;
-    std::vector<int> vec;
+    ft::vector<int>::iterator it;
+    ft::vector<int>::iterator it2;
+    ft::vector<int> vec;
 
     for (int i = 0; i < 10; ++i)
         vec.push_back(i);
@@ -16,6 +16,7 @@ int main()
 
     ++it;
     std::cout << *it << " after ++*\n";
+    std::cout << *it++ << " after *++\n";
     std::cout << *it++ << " after *++\n";
     --it;
     std::cout << *it << " after --*\n";

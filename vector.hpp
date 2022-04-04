@@ -5,6 +5,8 @@
 #include <memory>
 #include "random_acess_iterator.hpp"
 #include "reverse_iterator.hpp"
+#include "enable_if.hpp"
+#include "is_integral.hpp"
 
 namespace ft
 {   
@@ -46,6 +48,10 @@ namespace ft
                     _alloc.construct(&_vector[i], value);
             }
 
+            template <class InputIterator>
+            vector (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last, const allocator_type &allocate = allocator_type())
+            {}
+
             /*--------------------------------------------------------------------cpy constructor----------------------------------------------------------------------*/
             vector operator=(const vector &cpy)
             {
@@ -58,9 +64,7 @@ namespace ft
             }
 
             vector(const vector &cpy)
-            {
-                *this = cpy;
-            }
+            {*this = cpy;}
             
             /*--------------------------------------------------------------------Functions--------------------------------------------------------------------------*/
             /*increase by 1 de size of the vector and add the value to the end*/
@@ -231,7 +235,7 @@ namespace ft
 
             /* insert n elements in the vector from a range of elements from first to last */
             template <class InputIterator>
-            void insert (iterator position, InputIterator first, InputIterator last)
+            void insert (iterator position, typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last)
             {
                 int count = 0;
                 while (position != end())
@@ -303,8 +307,9 @@ namespace ft
             }
 
             template <class InputIterator>
-            void assign (InputIterator first, InputIterator last)
+            void assign (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last)
             {
+                std::cout << "ola from it\n";
                 clear();
                 while (first != last)
                     push_back(*(first)++);
@@ -312,6 +317,7 @@ namespace ft
 
             void assign (size_type n, const value_type &val)
             {
+                std::cout << "ola from size_t\n";
                 clear();
                 while (n--)
                     push_back(val);

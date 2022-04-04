@@ -53,9 +53,9 @@ namespace ft
             {++_container_ptr;return *this;}
 
             //Posfix increment create a copy, increment and return, @Tip Posfix uses more memory then Prefix
-            random_access_iterator &operator++(int)
+            random_access_iterator operator++(int)
             {
-                static random_access_iterator temp = *this;
+                random_access_iterator temp = *this;
                 ++*this;
                 return (temp);
             }
@@ -65,9 +65,9 @@ namespace ft
             {--_container_ptr; return *this;}
 
             //Posfix increment create a copy, increment and return, @Tip Posfix uses more memory then Prefix
-            random_access_iterator &operator--(int)
+            random_access_iterator operator--(int)
             {
-                static random_access_iterator<T> temp = *this;
+                random_access_iterator<T> temp = *this;
                 --*this;
                 return (temp);
             }
