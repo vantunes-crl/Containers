@@ -25,8 +25,8 @@ namespace ft
             /**/
             typedef random_access_iterator<value_type> iterator;
             typedef random_access_iterator<const value_type> const_iterator;
-            typedef reverse_iterator<const value_type> const_reverse_iterator;
-            typedef reverse_iterator<value_type> reverse_iterator;
+            typedef reverse_iterator<const_iterator> const_reverse_iterator;
+            typedef reverse_iterator<iterator> reverse_iterator;
             /*-------------------------------------------------------------------Constructors--------------------------------------------------------------------*/
 
             /*A constructor that can be called with a single parameter can serve a secondary purpose, of implicitly "converting" the parameter.

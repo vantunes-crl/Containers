@@ -1,6 +1,8 @@
 #ifndef RANDOM_ACESS_ITERATOR_HPP
 #define RANDOM_ACESS_ITERATOR_HPP
 
+#include "iterator_traits.hpp"
+
 namespace ft
 {
     template <typename T>
@@ -15,6 +17,7 @@ namespace ft
             typedef value_type const * const_pointer;
             typedef std::ptrdiff_t difference_type;
             typedef size_t size_type;
+            typedef random_access_iterator_tag	iterator_category;
 
             /* Default Contructors pointing to nullptr */
             random_access_iterator():_container_ptr(nullptr) {}
