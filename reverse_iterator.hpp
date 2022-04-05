@@ -21,10 +21,14 @@ namespace ft
             reverse_iterator():_container_ptr(nullptr) {}
 
             /* Overload contructor pointing to container_ptr */
-            reverse_iterator(pointer container_ptr): _container_ptr(container_ptr) {}
+            reverse_iterator(iterator_type container_ptr): _container_ptr(container_ptr) {}
 
             /* Cpy constructor */
-            reverse_iterator(const reverse_iterator &new_objct) {*this = new_objct;}
+            template <class Iter>
+            reverse_iterator (const reverse_iterator<Iter> &rev_it)
+            :_container_ptr(rev_it._container_ptr)
+            {}
+            
             /*Overload operators*/
             /*https://www.cplusplus.com/reference/iterator/RandomAccessIterator/*/
             reverse_iterator &operator=(const reverse_iterator &new_object)
@@ -50,9 +54,9 @@ namespace ft
             {--_container_ptr;return *this;}
 
             //Posfix increment create a copy, increment and return, @Tip Posfix uses more memory then Prefix
-            reverse_iterator &operator++(int)
+            reverse_iterator operator++(int)
             {
-                static reverse_iterator temp = *this;
+                reverse_iterator temp = *this;
                 ++*this;
                 return (temp);
             }
@@ -102,7 +106,7 @@ namespace ft
 
          ~reverse_iterator() {}
         private:
-            pointer _container_ptr;
+            iterator_type _container_ptr;
 
     };
 }

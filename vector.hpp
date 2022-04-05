@@ -7,6 +7,8 @@
 #include "reverse_iterator.hpp"
 #include "enable_if.hpp"
 #include "is_integral.hpp"
+#include "equal.hpp"
+#include "lexicographical_compare.hpp"
 
 namespace ft
 {   
@@ -50,16 +52,25 @@ namespace ft
 
             template <class InputIterator>
             vector (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last, const allocator_type &allocate = allocator_type())
-            {}
+            :_alloc(allocate), _size(0), _vector(_alloc.allocate(0)), _capacity(0)
+            {
+                while (first != last)
+                {
+                    push_back(*first);
+                    first++;
+                }
+            }
 
             /*--------------------------------------------------------------------cpy constructor----------------------------------------------------------------------*/
-            vector operator=(const vector &cpy)
+            vector &operator=(const vector &cpy)
             {
                 this->~vector();
-                _vector = cpy._vector;
-                _size = cpy._size;
-                _capacity = cpy._capacity;
                 _alloc = cpy._alloc;
+                _vector = _alloc.allocate(cpy._capacity);
+                _capacity = cpy._capacity;
+                _size = cpy._size;
+                for (size_type i = 0; i < _size; ++i)
+                    _alloc.construct(&_vector[i], cpy._vector[i]);
                 return *this;
             }
 
@@ -89,17 +100,7 @@ namespace ft
             size_type max_size() const
             {return _alloc.max_size();}
 
-            /* increase  the size of vector allocating more memory*/
-            /* Call vector destructor to destroy the old pointer*/
-            void increaseVector(size_type size)
-            {
-                pointer tmp = _alloc.allocate(size);
-                for (size_type i = 0; i < _size; ++i)
-                    _alloc.construct(&tmp[i], _vector[i]);
-                this->~vector();
-                _vector = tmp;
-                _capacity = _size;
-            }
+           
 
             /*increase the capacity of vector*/
             void reserve(size_type reserve_value)
@@ -158,11 +159,11 @@ namespace ft
             iterator end() {return _vector + _size;}
 
             /* reverse iterators */
-            reverse_iterator rbegin() {return _vector + _size - 1;}
-            const_reverse_iterator rbegin() const {return _vector + _size - 1;}
+            reverse_iterator rbegin() {return reverse_iterator(_vector + _size - 1);}
+            const_reverse_iterator rbegin() const {return const_reverse_iterator(_vector + _size - 1);}
 
-            const_reverse_iterator  rend() const {return _vector - 1;}
-            reverse_iterator rend() {return _vector - 1;}
+            const_reverse_iterator  rend() const {return const_reverse_iterator(_vector - 1);}
+            reverse_iterator rend() {return reverse_iterator(_vector - 1);}
 
             /*---------------------------------------------------------------elementor access-------------------------------------------------------------------------------*/
 
@@ -309,7 +310,6 @@ namespace ft
             template <class InputIterator>
             void assign (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last)
             {
-                std::cout << "ola from it\n";
                 clear();
                 while (first != last)
                     push_back(*(first)++);
@@ -317,7 +317,6 @@ namespace ft
 
             void assign (size_type n, const value_type &val)
             {
-                std::cout << "ola from size_t\n";
                 clear();
                 while (n--)
                     push_back(val);
@@ -336,7 +335,66 @@ namespace ft
                 a = b;
                 b = temp;
             }
+
+            /* increase  the size of vector allocating more memory*/
+            /* Call vector destructor to destroy the old pointer*/
+            void increaseVector(size_type size)
+            {
+                pointer tmp = _alloc.allocate(size);
+                for (size_type i = 0; i < _size; ++i)
+                    _alloc.construct(&tmp[i], _vector[i]);
+                this->~vector();
+                _vector = tmp;
+                _capacity = _size;
+            }
     };
+
+    template <class T, class Alloc>
+    bool operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+    {
+        if (lhs.size() == rhs.size())
+        {
+            return (equal(lhs.begin(), lhs.end(), rhs.begin()));
+        }
+        return (false);
+    }
+
+    template <class T, class Alloc>
+    bool operator!=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return (!(lhs == rhs));
+    }
+
+    template <class T, class Alloc>
+    bool operator<(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return (lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+    }
+
+
+    template <class T, class Alloc>
+    bool operator<=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return (!(rhs < lhs));
+    }
+
+    template <class T, class Alloc>
+    bool operator>(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return (rhs < lhs);
+    }
+
+    template <class T, class Alloc>
+    bool operator>=(const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+        return (!(lhs < rhs));
+    }
+
+    template <class T, class Alloc>
+    void swap(vector<T, Alloc> &x, vector<T, Alloc> &y)
+    {
+        x.swap(y);
+    }
 }
 
 #endif
