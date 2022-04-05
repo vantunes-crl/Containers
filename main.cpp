@@ -10,7 +10,7 @@ int main ()
     ft::vector<int> vec;
 
     for (int i = 0; i < 10; ++i)
-        push_back(i);
+        vec.push_back(i);
     
     print(vec);
 

@@ -322,6 +322,14 @@ namespace ft
                     push_back(val);
             }
 
+            void swap (vector &x)
+            {
+                vector<value_type> temp;
+                temp = *this;
+                *this = x;
+                x = temp;
+            }
+
     private:
             allocator_type _alloc;
             size_type _size;
