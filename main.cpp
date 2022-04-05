@@ -1,17 +1,19 @@
 // make_pair example
-#include <utility>      // std::pair
+//#include <utility>      // std::pair
 #include <iostream>     // std::cout
-#include "vector.hpp"
-#include "tests/print.hpp"
-#include <stdlib.h>
+// #include "vector.hpp"
+// #include "tests/print.hpp"
+// #include <stdlib.h>
+#include "stack.hpp"
 
 int main ()
 {
-    ft::vector<int> vec;
+    ft::stack<int> first;
+
+    first.empty();
 
     for (int i = 0; i < 10; ++i)
-        vec.push_back(i);
-    
-    print(vec);
+    {first.push(i);}
 
+    
 }
