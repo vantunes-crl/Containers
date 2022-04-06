@@ -3,6 +3,10 @@
 
 #include <cstddef>
 
+//https://www.cplusplus.com/reference/iterator/iterator_traits/
+/* a interface to the iteretors, For every iterator type, a 
+corresponding specialization of iterator_traits class template shall be defined
+with at least the following member types defined: */
 namespace ft {
 
     struct input_iterator_tag {};

@@ -307,6 +307,7 @@ namespace ft
                 }    
             }
 
+            /* assign new values to the container*/
             template <class InputIterator>
             void assign (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last)
             {
@@ -315,6 +316,7 @@ namespace ft
                     push_back(*(first)++);
             }
 
+            /* assign new values to the container*/
             void assign (size_type n, const value_type &val)
             {
                 clear();
@@ -364,6 +366,7 @@ namespace ft
             pointer _vector;
             size_type _capacity;
 
+            /* basic swap function to swap values inside the class */
             template <class B>
             void swap(B &a, B &b)
             {

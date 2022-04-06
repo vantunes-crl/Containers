@@ -1,6 +1,10 @@
 #ifndef IS_INTEGRAL_HPP
 #define IS_INTEGRAL_HPP
 
+//https://en.cppreference.com/w/cpp/types/is_integral
+/* checks whether T is an integral type. Provides the member constant value which is equal to true, if T is the type bool, char, char8_t (since C++20),
+char16_t, char32_t, wchar_t, short, int, long, long long, or any implementation-defined extended integer types, including any signed,
+unsigned, and cv-qualified variants. Otherwise, value is equal to false. */
 namespace ft
 {
     template <class T, T v>
