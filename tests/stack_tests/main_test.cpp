@@ -1,10 +1,5 @@
-// make_pair example
-//#include <utility>      // std::pair
-#include <iostream>     // std::cout
-// #include "vector.hpp"
-// #include "tests/print.hpp"
-// #include <stdlib.h>
-#include "stack.hpp"
+#include <iostream>
+#include "../../stack.hpp"
 #include <stack>
 
 int main ()
