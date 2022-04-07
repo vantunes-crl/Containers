@@ -2,7 +2,7 @@
 
 int main()
 {
-    std::vector<int> vec;
+    std::vector<TYPE> vec;
 
     for (int i = 0; i < 10; ++i)
         vec.push_back(i);

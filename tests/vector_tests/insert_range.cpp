@@ -5,8 +5,8 @@ using namespace ft;
 
 int main()
 {
-    ft::vector<int> vec;
-    ft::vector<int> vec2;
+    ft::vector<TYPE> vec;
+    ft::vector<TYPE> vec2;
 
     int i = -1;
 

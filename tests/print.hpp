@@ -1,8 +1,10 @@
 #include <iostream>
-#include "../random_acess_iterator.hpp"
-#include "../reverse_iterator.hpp"
 #include "../vector.hpp"
 #include <vector>
+
+#define TYPE int
+#define NAMESPACE ft
+
 
 template <class T>
 void print(ft::vector<T> &vec)

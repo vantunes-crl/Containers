@@ -2,8 +2,8 @@
 
 int main()
 {
-    ft::vector<int> vec;
-    std::vector<int> vec2;
+    ft::vector<TYPE> vec;
+    std::vector<TYPE> vec2;
 
 
     for (int i = 0; i < 10; ++i)

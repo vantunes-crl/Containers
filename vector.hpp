@@ -3,12 +3,10 @@
 
 #include <iostream>
 #include <memory>
-#include "random_acess_iterator.hpp"
-#include "reverse_iterator.hpp"
-#include "enable_if.hpp"
-#include "is_integral.hpp"
-#include "equal.hpp"
-#include "lexicographical_compare.hpp"
+#include "type_traits/type_traits.hpp"
+#include "algorism/algorism.hpp"
+#include "utility/utility.hpp"
+#include "iterator/iterator.hpp"
 
 namespace ft
 {   
