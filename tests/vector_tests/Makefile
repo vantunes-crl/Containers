@@ -1,8 +1,16 @@
 CC = clang++
 
-PUSH_BACK:
-	@$(CC) push_back.cpp -DNAMESPACE="ft" -o push_back && ./push_back > push_back.ft
-	@$(CC) push_back.cpp -DNAMESPACE="std" -o push_back && ./push_back > push_back.std
+LOG:
+	@[ ! -d "logs" ] && mkdir -p "logs" || [ $$? -eq 1 ]
+
+NAME = push_back
+PUSH_BACK: LOG
+	@echo "Start $(NAME) tests!"
+	@$(CC) $(NAME).cpp -DNAMESPACE="ft" -o $(NAME) && ./$(NAME) > $(NAME).ft
+	@$(CC) $(NAME).cpp -DNAMESPACE="std" -o $(NAME) && ./$(NAME) > $(NAME).std
+	@(diff $(NAME).ft $(NAME).std; [ $$? -eq 0 ] || [ $$? -eq 1 ]) > ./logs/$(NAME).log
+	@rm -f $(NAME).ft $(NAME).std
+	@if [ "$(shell wc -l logs/$(NAME).log)" = "0 logs/$(NAME).log" ]; then echo "\033[1;32mSucess 😁 🤓"; else echo "\033[1;31mFail 😮‍💨"; fi;
 
 ASSING_RANGE:
 	$(CC) assign_range.cpp -o assign_range
@@ -69,6 +77,7 @@ all: PUSH_BACK ASSING_RANGE ASSING AT BACK CLEAR EQUAL ERASE_RANGE ERASE FRONT \
 	PAIR POP_BACK RELATIONAL_OPERATORS RESERVE_RESIZE SWAP_MEMBER
 
 clean:
-	rm -f push_back assign_range assign at back clear equal erase_range erase front
-	rm -f insert_range insert_size insert iterator lexicographical_compare pair pop_back
-	rm -f relational_operators reserve_resize reverse_iterator swap_member
+	@rm -f push_back assign_range assign at back clear equal erase_range erase front
+	@rm -f insert_range insert_size insert iterator lexicographical_compare pair pop_back
+	@rm -f relational_operators reserve_resize reverse_iterator swap_member
+	@echo "\033[1;34mEverything CLEAR"

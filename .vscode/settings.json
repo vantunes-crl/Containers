@@ -69,7 +69,12 @@
         "optional": "cpp",
         "ratio": "cpp",
         "sstream": "cpp",
-        "__memory": "cpp"
+        "__memory": "cpp",
+        "condition_variable": "cpp",
+        "map": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     },
     "C_Cpp.dimInactiveRegions": false
 }

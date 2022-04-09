@@ -3,7 +3,9 @@
 #include <vector>
 
 #define TYPE int
+#ifndef NAMESPACE
 #define NAMESPACE ft
+#endif
 
 
 template <class T>
