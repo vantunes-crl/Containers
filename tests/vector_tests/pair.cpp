@@ -1,3 +1,5 @@
+#pragma clang diagnostic ignored "-Wc++11-extensions"
+
 #include "../print.hpp"
 
 int main()
