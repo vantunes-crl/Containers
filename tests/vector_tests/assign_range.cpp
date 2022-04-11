@@ -2,8 +2,8 @@
 
 int main()
 {
-    std::vector<TYPE> vec;
-    std::vector<TYPE> vec2;
+    NAMESPACE::vector<TYPE> vec;
+    NAMESPACE::vector<TYPE> vec2;
 
     for (int i = 0; i < 10; ++i)
         vec.push_back(i);

@@ -1,11 +1,8 @@
 #include "../print.hpp"
 
-//using namespace ft;
-using namespace std;
-
 int main()
 {
-    vector<int> vec;
+    NAMESPACE::vector<int> vec;
     int i = -1;
 
     while (++i < 5)

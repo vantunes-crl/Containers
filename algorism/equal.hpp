@@ -10,12 +10,12 @@ namespace ft
     {
         while (first1 != last1)
         {
-            if (!(*first1 == *first2))
-                return false;
+            if (*first1 != *first2)
+                return true;
             first1++;
             first2++;
         }
-        return true;
+        return false;
     }
 
     /* has more 1 argument , that accept a functions to use to compare the values @pred */
@@ -24,12 +24,12 @@ namespace ft
     {
         while (first1 != last1)
         {
-            if ((!(*first1 == first2)) || ((!pred(*first1, *first2))))
-                return false;
+            if ((!(*first1 == *first2)) || ((!pred(*first1, *first2))))
+                return true;
             first1++;
             first2++;
         }
-        return true;
+        return false;
     }
 
 }

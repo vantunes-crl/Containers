@@ -1,12 +1,9 @@
 #include "../print.hpp"
 
-using namespace ft;
-//using namespace std;
-
 int main()
 {
-    ft::vector<TYPE> vec;
-    ft::vector<TYPE> vec2;
+    NAMESPACE::vector<TYPE> vec;
+    NAMESPACE::vector<TYPE> vec2;
 
     int i = -1;
 

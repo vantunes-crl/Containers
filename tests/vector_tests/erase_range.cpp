@@ -2,7 +2,7 @@
 
 int main()
 {
-    std::vector<TYPE> vec;
+    NAMESPACE::vector<TYPE> vec;
 
     for (int i = 0; i < 10; ++i)
         vec.push_back(i);

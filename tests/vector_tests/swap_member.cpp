@@ -2,8 +2,8 @@
 
 int main ()
 {
-  ft::vector<int> foo (3,100); 
-  ft::vector<int> bar (5,200);
+  NAMESPACE::vector<int> foo (3,100); 
+  NAMESPACE::vector<int> bar (5,200);
 
   foo.swap(bar);
 

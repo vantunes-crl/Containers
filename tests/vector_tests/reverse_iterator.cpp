@@ -1,13 +1,10 @@
 #include "../print.hpp"
-#include <vector>
-
-using namespace ft;
 
 int main()
 {
-    vector<int>::reverse_iterator it;
-    vector<int>::reverse_iterator it2;
-    vector<int> vec;
+    NAMESPACE::vector<int>::reverse_iterator it;
+    NAMESPACE::vector<int>::reverse_iterator it2;
+    NAMESPACE::vector<int> vec;
 
     for (int i = 1; i < 10; ++i)
         vec.push_back(i);
@@ -44,16 +41,7 @@ int main()
     std::cout << "\n***********************************************\n";
     for (it = vec.rbegin(); it != vec.rend(); it++)
         std::cout << *it << "\n";
-    //print(vec);
+
     std::cout << vec.capacity() << "capacity\n";
 
-    //diff 
-    // 15c15
-    // < 0 0 81 0 1 2 3 4 5 memory random number
-    // ---
-    // > 5 0 49 0 1 2 3 4 5 memory random number
-    // 26c26
-    // < 16capacity /*capacity in the real vector allocate more then necessary*/
-    // ---
-    // > 9capacity
 }

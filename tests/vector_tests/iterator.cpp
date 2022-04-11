@@ -1,13 +1,10 @@
 #include "../print.hpp"
-#include <vector>
-
-using namespace ft;
 
 int main()
 {
-    ft::vector<int>::iterator it;
-    ft::vector<int>::iterator it2;
-    ft::vector<int> vec;
+    NAMESPACE::vector<int>::iterator it;
+    NAMESPACE::vector<int>::iterator it2;
+    NAMESPACE::vector<int> vec;
 
     for (int i = 0; i < 10; ++i)
         vec.push_back(i);

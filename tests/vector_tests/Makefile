@@ -3,6 +3,16 @@ CC = clang++
 LOG:
 	@[ ! -d "logs" ] && mkdir -p "logs" || [ $$? -eq 1 ]
 
+CONSTRUCTORS: LOG
+	@echo "Start constructors tests!"
+	@$(CC) constructors.cpp -DNAMESPACE="ft" -o constructors && ./constructors > constructors.ft
+	@$(CC) constructors.cpp -DNAMESPACE="std" -o constructors && ./constructors > constructors.std
+	@if [ "$(shell diff constructors.ft constructors.std)" = "" ]; then\
+		echo "\033[1;32mPASSED\033[m 😁 🤓";\
+	else\
+		echo "\033[1;31mFAIL\033[m 😮‍💨" && echo "$(shell diff constructors.ft constructors.std)" > logs/constructors.log;\
+	fi;
+
 PUSH_BACK: LOG
 	@echo "Start push_back tests!"
 	@$(CC) push_back.cpp -DNAMESPACE="ft" -o push_back && ./push_back > push_back.ft
@@ -71,7 +81,7 @@ EQUAL: LOG
 	@if [ "$(shell diff equal.ft equal.std)" = "" ]; then\
 		echo "\033[1;32mPASSED\033[m 😁 🤓";\
 	else\
-		echo "\033[1;31mFAIL\033[m 😮‍💨" && echo "$(shell diff equal.ft equal.std)" > logs/push_back.log;\
+		echo "\033[1;31mFAIL\033[m 😮‍💨" && echo "$(shell diff equal.ft equal.std)" > logs/equal.log;\
 	fi;
 
 ERASE_RANGE: LOG
@@ -231,9 +241,9 @@ all: PUSH_BACK ASSING_RANGE ASSING AT BACK CLEAR EQUAL ERASE_RANGE ERASE FRONT \
 clean:
 	@rm -f push_back assign_range assign at back clear equal erase_range erase front
 	@rm -f insert_range insert_size insert iterator lexicographical_compare pair pop_back
-	@rm -f relational_operators reserve_resize reverse_iterator swap_member capacity
+	@rm -f relational_operators reserve_resize reverse_iterator swap_member capacity constructors
 	@rm -f *.ft *.std
-	@echo "\033[1;34mEverything CLEAR"
+	@echo "\033[1;34mEverything CLEAR\033[m"
 
 fclean: clean
-	rm -rf logs
+	@rm -rf logs

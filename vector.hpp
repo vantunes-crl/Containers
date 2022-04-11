@@ -304,7 +304,7 @@ namespace ft
                     range++;
                 for (int i = range; i > 0; --i)
                 {
-                    for (int i = pos; i < _size -1; ++i)
+                    for (int i = pos; i < _size; ++i)
                         swap(_vector[i], _vector[i + 1]);
                 }
                 while (range--)
