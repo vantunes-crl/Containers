@@ -50,12 +50,22 @@ namespace ft
 
             template <class InputIterator>
             vector (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last, const allocator_type &allocate = allocator_type())
-            :_alloc(allocate), _size(0), _vector(_alloc.allocate(0)), _capacity(0)
+            :_alloc(allocate)
             {
+                InputIterator start = first;
+                InputIterator end = last;
+                int range = 0;
+                while (start++ != end)
+                    range++;
+                _vector = _alloc.allocate(range);
+                int i = 0;
                 while (first != last)
                 {
-                    push_back(*first);
+                    _alloc.construct(&_vector[i], *first);
                     first++;
+                    i++;
+                    _size++;
+                    _capacity++;
                 }
             }
 
@@ -79,7 +89,14 @@ namespace ft
             /*increase by 1 de size of the vector and add the value to the end*/
             void push_back(const value_type &value)
             {
-                increaseVector(++_size);
+                ++_size;
+                if (_size > _capacity)
+                {
+                    if (_capacity)
+                        increaseVector(_capacity * 2);
+                    else
+                        increaseVector(1);
+                }
                 _alloc.construct(&_vector[_size - 1], value);
             }
             
@@ -132,9 +149,9 @@ namespace ft
             /*Deallocate all data from vector*/
             ~vector() 
             {
-                for (size_t i = 0; i < _size; ++i)
+                for (size_t i = 0; i < _capacity; ++i)
                     _alloc.destroy(&_vector[i]);
-                _alloc.deallocate(_vector, _size);
+                _alloc.deallocate(_vector, _capacity);
             };
 
             /*-----------------------------------------------------------------Operators Overload-----------------------------------------------------------------------*/
@@ -382,7 +399,10 @@ namespace ft
                     _alloc.construct(&tmp[i], _vector[i]);
                 this->~vector();
                 _vector = tmp;
-                _capacity = _size;
+                if (_capacity == 1)
+                    ++_capacity;
+                else
+                    _capacity = size;
             }
     };
 }
