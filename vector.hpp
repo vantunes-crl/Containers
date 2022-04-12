@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory>
 #include "type_traits/type_traits.hpp"
-#include "algorism/algorism.hpp"
+#include "algorithm/algorithm.hpp"
 #include "utility/utility.hpp"
 #include "iterator/iterator.hpp"
 

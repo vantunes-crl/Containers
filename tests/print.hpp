@@ -1,6 +1,10 @@
 #include <iostream>
 #include "../vector.hpp"
 #include <vector>
+#include <algorithm>
+#include <iterator>
+#include <type_traits>
+#include <utility>
 
 #define TYPE int
 #ifndef NAMESPACE
