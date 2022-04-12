@@ -36,11 +36,13 @@ class binary_tree
                     {
                         if (find->left == nullptr)
                         {
+							// When left child empty
+							// So add new node here
                             find->left = node;
                             return;
                         }
                         else
-                            find = find->left;
+                            find = find->left; //otherwise visit the sub-tree
                     }
                     else
                     {
@@ -121,9 +123,9 @@ int main()
 	// Display tree nodes
 	std::cout << "Preorder " << std::endl;
 	tree->preorder(tree->root);
-	std::cout << "\nInorder " << std::endl;
-	tree->inorder(tree->root);
-	std::cout << "\nPostorder " << std::endl;
-	tree->postorder(tree->root);
+	// std::cout << "\nInorder " << std::endl;
+	// tree->inorder(tree->root);
+	// std::cout << "\nPostorder " << std::endl;
+	// tree->postorder(tree->root);
 	return 0;
 }
