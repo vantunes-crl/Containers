@@ -24,7 +24,7 @@ namespace ft
             typedef value_type * pointer;
             typedef value_type const * const_pointer;
             typedef size_t size_type;
-            /**/
+            /* iterators */
             typedef random_access_iterator<value_type> iterator;
             typedef random_access_iterator<const value_type> const_iterator;
             typedef reverse_iterator<const_iterator> const_reverse_iterator;

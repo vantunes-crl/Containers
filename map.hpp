@@ -3,6 +3,25 @@
 
 #include "utility/utility.hpp"
 #include <iostream>
+#include "iterator/iterator.hpp"
+
+template < class T > 
+class BinaryTree
+{
+    public:
+        BinaryTree(T data)
+        :data(data)
+        {
+            left = right = nullptr;
+        }
+
+        ~BinaryTree() {}
+    private:
+        BinaryTree *left;
+        BinaryTree *right;
+        T data;
+
+};
 
 namespace ft
 {
@@ -19,15 +38,41 @@ namespace ft
             typedef typename allocator_type::const_reference const_reference;
             typedef typename allocator_type::pointer pointer;
             typedef typename allocator_type::const_pointer const_pointer;
-            typedef std::ptrdiff_t difference_type;
             typedef size_t size_type;
 
+            /* iterators */
+            typedef random_access_iterator<value_type> iterator;
+            typedef random_access_iterator<const value_type> const_iterator;
+            typedef reverse_iterator<const_iterator> const_reverse_iterator;
+            typedef reverse_iterator<iterator> reverse_iterator;
+            typedef typename iterator_traits<iterator>::difference_type difference_type;
 
+            explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+            :_root(nullptr), _size(0), _alloc(alloc)
+            {}
 
-            map();
-            ~map();
+            pair<iterator,bool> insert (const value_type& val)
+            {
+                pair<iterator, bool> par;
+
+                if (_root == nullptr)
+                {
+                    // _root = _alloc.allocate(BinaryTree<value_type>(val));
+                    // _alloc.construct(&_root, BinaryTree<value_type>(val));
+                    // std::cout << "root" << _root << std::endl;
+                }
+                return par;
+
+            }
+
+            ~map() {}
 
         private:
+            size_type _size;
+            allocator_type _alloc;
+            pointer _root;
+
+
     };
 }
 
