@@ -1,9 +1,16 @@
 #include "map.hpp"
+#include <iostream>
+#include <map>
+
+using namespace ft;
 
 int main()
 {
-    ft::map<int,char> m;
+    map<const std::string, int> m;
 
-    m.insert(ft::make_pair("earth", 1));
+    auto p = make_pair("ola" , 10);
 
+    // std::cout << p.first << std::endl;
+    // std::cout << p.second << std::endl;
+    m.insert(p);
 }

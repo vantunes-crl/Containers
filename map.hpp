@@ -9,6 +9,9 @@ template < class T >
 class BinaryTree
 {
     public:
+        BinaryTree *left;
+        BinaryTree *right;
+        T data;
         BinaryTree(T data)
         :data(data)
         {
@@ -17,22 +20,20 @@ class BinaryTree
 
         ~BinaryTree() {}
     private:
-        BinaryTree *left;
-        BinaryTree *right;
-        T data;
+        
 
 };
 
 namespace ft
 {
-    template <class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key, T> > >
+    template <class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<pair<const Key, T> > >
     class map
     {
         public:
             typedef Key key_type;
             typedef T map_type;
             typedef Compare key_compare;
-            typedef ft::pair<const key_type, map_type> value_type;
+            typedef pair<const key_type, map_type> value_type;
             typedef Alloc allocator_type;
             typedef typename allocator_type::reference reference;
             typedef typename allocator_type::const_reference const_reference;
@@ -51,15 +52,15 @@ namespace ft
             :_root(nullptr), _size(0), _alloc(alloc)
             {}
 
-            pair<iterator,bool> insert (const value_type& val)
+            pair<iterator, bool> insert (const value_type& val)
             {
                 pair<iterator, bool> par;
 
                 if (_root == nullptr)
                 {
-                    // _root = _alloc.allocate(BinaryTree<value_type>(val));
-                    // _alloc.construct(&_root, BinaryTree<value_type>(val));
-                    // std::cout << "root" << _root << std::endl;
+                    _root = _alloc.allocate(1);
+                    _alloc.construct(_root, BinaryTree<value_type>(val));
+                    //std::cout << "root " << _root->data.first << " " << _root->data.second << std::endl;
                 }
                 return par;
 

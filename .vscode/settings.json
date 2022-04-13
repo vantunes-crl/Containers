@@ -75,7 +75,8 @@
         "semaphore": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "iomanip": "cpp"
     },
     "C_Cpp.dimInactiveRegions": false
 }
