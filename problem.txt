@@ -1,0 +1,4 @@
+class Alloc = std::allocator<pair<const Key, T> is useless in the map main function, becouse since we are using
+    linked list, i need use a struct to link the binary_tree, but the return of std::allocator<pair<const Key, T>
+    is tipe <pair<const Key, T> cant create a linked list with this return. the solution is create a diferent template class
+    that accepts class Alloc = std::allocator<Tree<T> and use allocator there.
