@@ -5,6 +5,14 @@
 
 namespace ft
 {
+
+    template <class T>
+    struct TreeList
+    {
+        T *content;
+        TreeList *next = nullptr;
+    };
+    
     template <class T>
     struct Tree
     {
@@ -32,6 +40,7 @@ namespace ft
                 {
                     _root = _alloc.allocate(1);
                     _alloc.construct(_root, value);
+                    _size++;
                     return _root;
                 }
 
@@ -147,9 +156,9 @@ namespace ft
                     std::cout << "case 3\n";
                     
                 }
+                _size--;
                 _alloc.deallocate(curr, sizeof(curr));
             }
-
 
             void inorder(node root)
             {
@@ -159,6 +168,28 @@ namespace ft
                 inorder(root->left);
                 std::cout << root->data.first << root->data.second << std::endl;
                 inorder(root->right);
+            }
+
+            void TreeToList(node root)
+            {
+                if (root == nullptr)
+                    return;
+                static int count;
+
+                TreeToList(root->left);
+                count += 1;
+                if (count == 1)
+                    _list = new T[10];
+                _list[count -1] = root->data;
+                TreeToList(root->right);
+            }
+
+            void printList()
+            {
+                int i = -1;
+                while (++i < 9)
+                    std::cout << _list[i].first << std::endl; 
+            
             }
 
             node getRoot()
@@ -171,7 +202,7 @@ namespace ft
                 return _alloc;
             }
 
-            binary_tree():_root(nullptr)
+            binary_tree():_root(nullptr), _size(0)
             {}
 
             ~binary_tree()
@@ -180,6 +211,8 @@ namespace ft
         private:
             node _root;
             allocator_type _alloc;
+            T *_list;
+            size_t _size;
 
             void clear(node root)
             {

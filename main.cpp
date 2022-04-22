@@ -47,12 +47,13 @@ int main()
     auto p =  bi.insert(ft::make_pair(19, 'd'));
     std::cout << p.first->first << std::endl;
     
-    bi.print();
+    // bi.print();
 
 
-    //bi.remove(ft::make_pair(25,'d'));
-    auto i = bi.begin();
-    std::cout << i->first << i->second<< std::endl;
+    // //bi.remove(ft::make_pair(25,'d'));
+    // auto i = bi.begin();
+    // std::cout << i->first << i->second<< std::endl;
+    
 
     //bi.inorder(bi.getRoot());
     //std::cout << bi.getRoot()->data.first << bi.getRoot()->data.second;

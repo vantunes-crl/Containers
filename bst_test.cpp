@@ -40,6 +40,10 @@ int main()
 
     bi.remove(ft::make_pair(25,'d'));
 
-    bi.inorder(bi.getRoot());
+   // bi.inorder(bi.getRoot());
+
+    bi.TreeToList(bi.getRoot());
+
+    bi.printList();
     //std::cout << bi.getRoot()->data.first << bi.getRoot()->data.second;
 }
