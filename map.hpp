@@ -24,6 +24,7 @@ namespace ft
             typedef typename allocator_type::const_pointer const_pointer;
             typedef binary_tree<value_type> bst;
             typedef size_t size_type;
+            typedef Tree<value_type> * node;
 
             /* iterators */
             typedef iterator_tree<value_type> iterator;
@@ -37,15 +38,26 @@ namespace ft
             {}
 
             pair<iterator, bool> insert (const value_type& val)
-            {
-                Tree<value_type> *p = _root.insert(val);
-
+            {   
+                node p = _root.findKey(val);
+                if (p == nullptr)
+                    p = _root.insert(val);
+                else
+                {
+                    std::cout << p->data.first << std::endl;
+                    return make_pair(iterator(p), false);
+                }
                 return make_pair(iterator(p), true);
             }
 
             iterator begin()
             {
                 return (iterator(_root.getMinKey(_root.getRoot())));
+            }
+
+            iterator end()
+            {
+                return (iterator(_root.getMaxKey(_root.getRoot())));
             }
 
 

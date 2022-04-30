@@ -150,6 +150,12 @@ namespace ft
             iterator_tree(node root):_root(root)
             {}
 
+            bool operator==(const iterator_tree &obj2) const
+            {return _root == obj2._root;}
+
+            bool operator !=(const iterator_tree &obj2) const
+            {return !(*this == obj2);}
+
             pointer operator->()
             {return &_root->data;}
             

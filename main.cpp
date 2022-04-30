@@ -44,13 +44,19 @@ int main()
     bi.insert(ft::make_pair(25, 'd'));
     bi.insert(ft::make_pair(8, 'd'));
     bi.insert(ft::make_pair(16, 'd'));
-    // auto p =  bi.insert(ft::make_pair(19, 'd'));
-    // std::cout << p.first->first << std::endl;
+    auto p =  bi.insert(ft::make_pair(19, 'd'));
+    
+    // std::cout << p.first->first << p.second << std::endl;
     
     ft::map<int, char>::iterator it;
     it = bi.begin();
 
-    std::cout << it->first << std::endl;
+    while (it != bi.end())
+    {
+        std::cout << it->first << it->second << std::endl;
+        ++it;
+    }
+    
 
 
     // //bi.remove(ft::make_pair(25,'d'));

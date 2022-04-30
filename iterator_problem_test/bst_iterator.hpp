@@ -25,17 +25,17 @@ namespace ft
             bst_iterator(node root):_root(root)
             {}
 
-            // // bst_iterator &operator=(const bst_iterator &new_object)
-            // // {
-            // //     _tree = new_object._tree;
-            // //     return (*this);
-            // // }
+            // bst_iterator &operator=(const bst_iterator &new_object)
+            // {
+            //     _tree = new_object._tree;
+            //     return (*this);
+            // }
 
-            // // bool operator==(const bst_iterator &obj2) const
-            // // {return _tree == obj2._tree;}
+            // bool operator==(const bst_iterator &obj2) const
+            // {return _tree == obj2._tree;}
 
-            // // bool operator !=(const bst_iterator &obj2) const
-            // // {return !(*this == obj2);}
+            // bool operator !=(const bst_iterator &obj2) const
+            // {return !(*this == obj2);}
 
             // pointer operator->()
             // {return _root;}
