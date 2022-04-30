@@ -2,29 +2,23 @@
 #define BINARY_TREE_HPP
 
 #include <memory>
+#include "iterator/iterator.hpp"
 
 namespace ft
 {
-
-    template <class T>
-    struct TreeList
-    {
-        T *content;
-        TreeList *next = nullptr;
-    };
-    
     template <class T>
     struct Tree
     {
-            Tree(T data)
-            :data(data), left(nullptr), right(nullptr) {}
+        Tree(T data, Tree * parent)
+        :data(data), left(nullptr), right(nullptr), parent(parent) {}
 
-            Tree()
-            :data(data), left(nullptr), right(nullptr) {}
+        Tree(T data)
+        :data(data), left(nullptr), right(nullptr), parent(nullptr) {}
 
-            T data;
-            Tree *left;
-            Tree *right;
+        T data;
+        Tree *left;
+        Tree *right;
+        Tree *parent;
     };
 
     template <class T, class Alloc = std::allocator<Tree<T> > >
@@ -34,40 +28,42 @@ namespace ft
             typedef Alloc allocator_type;
             typedef Tree<T> * node;
 
-            node insert(T value)
+            binary_tree():_root(nullptr), _size(0)
+            {}
+
+            node insert(T data)
             {
                 if (_root == nullptr)
                 {
                     _root = _alloc.allocate(1);
-                    _alloc.construct(_root, value);
-                    _size++;
+                    _alloc.construct(_root, Tree<T>(data));
                     return _root;
                 }
-
+                
                 node curr;
                 node prev;
 
                 curr = _root;
+
                 while (curr != nullptr)
                 {
                     prev = curr;
-
-                    if (curr->data > value)
+                    if (curr->data > data)
                         curr = curr->left;
                     else
                         curr = curr->right;
                 }
 
-                if (prev->data > value)
+                if (prev->data > data)
                 {
                     prev->left = _alloc.allocate(1);
-                    _alloc.construct(prev->left, value);
+                    _alloc.construct(prev->left, Tree<T>(data, prev));
                     return prev->left;
                 }
                 else
                 {
                     prev->right = _alloc.allocate(1);
-                    _alloc.construct(prev->right, value);
+                    _alloc.construct(prev->right, Tree<T>(data, prev));
                     return prev->right;
                 }
             }
@@ -96,100 +92,12 @@ namespace ft
                 return curr;
             }
 
-            void remove(T Key)
+            node getMaxKey(node curr)
             {
-                node parent = nullptr;
-                node curr = _root;
-
-                while (curr != nullptr && curr->data.first != Key.first)
-                {
-                    parent = curr;
-                    if (Key.first < curr->data.first)
-                        curr = curr->left;
-                    else
-                        curr = curr->right;
+                while (curr->right != nullptr) {
+                    curr = curr->right;
                 }
-                if (curr == nullptr)
-                    std::cout << "Key not found\n";
-                
-                if (!curr->left && !curr->right)  //case 1 node to be deleted has no children, i.e., it is a leaf node
-                {
-                    if (curr != _root)
-                    {
-                        if (parent->left == curr)
-                            parent->left = nullptr;
-                        else
-                            parent->right = nullptr;
-                    }    
-                    else
-                        _root = nullptr;
-                    std::cout << "case 1\n";
-                }
-                else if (curr->left && curr->right) //case 2 node to be deleted has two children
-                {
-                    node sucessor = getMinKey(curr->right);
-
-                    T data = sucessor->data;
-
-                    std::cout << "case 2\n";
-                    remove(sucessor->data);
-                    curr->data = data;
-                }
-                else //case 3 node to be deleted has only one child
-                {
-                    node child;
-
-                    if (curr->left)
-                        child = curr->left;
-                    else
-                        child = curr->right;
-                    
-                    if (curr != _root)
-                    {
-                        if (curr == parent->left)
-                            parent->left = child;
-                        else
-                            parent->right = child;
-                    }
-                    else
-                        _root = child;
-                    std::cout << "case 3\n";
-                    
-                }
-                _size--;
-                _alloc.deallocate(curr, sizeof(curr));
-            }
-
-            void inorder(node root)
-            {
-                if (root == nullptr)
-                    return;
-                
-                inorder(root->left);
-                std::cout << root->data.first << root->data.second << std::endl;
-                inorder(root->right);
-            }
-
-            void TreeToList(node root)
-            {
-                if (root == nullptr)
-                    return;
-                static int count;
-
-                TreeToList(root->left);
-                count += 1;
-                if (count == 1)
-                    _list = new T[10];
-                _list[count -1] = root->data;
-                TreeToList(root->right);
-            }
-
-            void printList()
-            {
-                int i = -1;
-                while (++i < 9)
-                    std::cout << _list[i].first << std::endl; 
-            
+                return curr;
             }
 
             node getRoot()
@@ -202,27 +110,87 @@ namespace ft
                 return _alloc;
             }
 
-            binary_tree():_root(nullptr), _size(0)
-            {}
-
             ~binary_tree()
-            {clear(_root);}
-
+            {}
+        
+            
         private:
             node _root;
             allocator_type _alloc;
-            T *_list;
             size_t _size;
 
-            void clear(node root)
-            {
-                if (root == nullptr)
-                    return;
+            // void clear(node root)
+            // {
+            //     if (root == nullptr)
+            //         return;
 
-                clear(root->left);
-                _alloc.deallocate(root, sizeof(root));
-                clear(root->right);
+            //     clear(root->left);
+            //     _alloc.deallocate(root, sizeof(root));
+            //     clear(root->right);
+            // }
+
+    };
+
+    template<class T>
+    class iterator_tree
+    {
+        public:
+            typedef T value_type;
+            typedef value_type & reference;
+            typedef value_type const & const_reference;
+            typedef value_type * pointer;
+            typedef value_type const * const_pointer;
+            typedef std::ptrdiff_t difference_type;
+            typedef size_t size_type;
+            typedef bidirectional_iterator_tag iterator_category;
+            typedef Tree<T> * node;
+
+            iterator_tree() {}
+
+            iterator_tree(node root):_root(root)
+            {}
+
+            pointer operator->()
+            {return &_root->data;}
+            
+            reference operator*() const
+            {return *_root->data;}
+
+            iterator_tree &operator=(const iterator_tree &new_object)
+            {
+                _root = new_object._root;
+                return (*this);
             }
+
+            iterator_tree &operator++()
+            {
+                if (_root == nullptr)
+                    return *this;
+
+                if (_root->right == nullptr)
+                {
+                    if (_root->data.first > _root->parent->data.first)
+                    {
+                        while (_root->data.first > _root->parent->data.first && _root->parent->parent)
+                            _root = _root->parent;
+                        _root = _root->parent;
+                    }
+                    else
+                        _root = _root->parent;
+                    return *this;
+                }
+                else
+                {
+                    binary_tree<T> b;
+                    _root = b.getMinKey(_root->right);
+                    return *this;
+                }
+            }
+
+
+            ~iterator_tree() {}
+        private:
+            node _root;
     };
 }
 

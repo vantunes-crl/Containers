@@ -5,7 +5,6 @@
 #include <iostream>
 #include "iterator/iterator.hpp"
 #include "binary_tree.hpp"
-#include "bst_iterator.hpp"
 
 namespace ft
 {
@@ -27,8 +26,8 @@ namespace ft
             typedef size_t size_type;
 
             /* iterators */
-            typedef bst_iterator<value_type> iterator;
-            typedef bst_iterator<const value_type> const_iterator;
+            typedef iterator_tree<value_type> iterator;
+            typedef iterator_tree<const value_type> const_iterator;
             typedef reverse_iterator<const_iterator> const_reverse_iterator;
             typedef reverse_iterator<iterator> reverse_iterator;
             typedef typename iterator_traits<iterator>::difference_type difference_type;
@@ -49,10 +48,6 @@ namespace ft
                 return (iterator(_root.getMinKey(_root.getRoot())));
             }
 
-            void print()
-            {
-                _root.inorder(_root.getRoot());
-            }
 
             ~map() {}
 
