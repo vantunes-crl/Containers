@@ -51,7 +51,7 @@ int main()
     bi.insert(ft::make_pair(20, 'c'));
     bi.insert(ft::make_pair(18, 'd'));
     bi.insert(ft::make_pair(30, 'd'));
-    bi.insert(ft::make_pair(12, 'd'));
+    bi.insert(ft::make_pair(12, 't'));
     bi.insert(ft::make_pair(25, 'd'));
     bi.insert(ft::make_pair(8, 'd'));
     bi.insert(ft::make_pair(16, 'd'));
@@ -61,16 +61,20 @@ int main()
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
-    ft::map<int, char>::reverse_iterator it;
-    it = bi.rbegin();
+    ft::map<int, char>::iterator it;
+    
 
-    //it->first;
+    //std::cout << bi.max_size() << std::endl;
 
-    //std::cout  << it->first << std::endl;
+    bi[12] = 'a';
+    it = bi.begin();
+    // //it->first;
 
-    //std::cout << it->first << std::endl;
+    // //std::cout  << it->first << std::endl;
 
-    for (it = bi.rbegin(); it != bi.rend(); ++it)
+    // //std::cout << it->first << std::endl;
+
+    for (it = bi.begin(); it != bi.end(); ++it)
         std::cout << it->first << it->second << std::endl;
 
     // for (auto i = 0; i != map.Size(); ++i)

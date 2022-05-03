@@ -76,6 +76,7 @@ namespace ft
                 return (iterator(_root.getMinKey(_root.getRoot())));
             }
 
+            /* return a const iterator to the begin */
             const_iterator begin() const
             {
                 return (iterator(_root.getMinKey(_root.getRoot())));
@@ -87,11 +88,13 @@ namespace ft
                 return iterator();
             }
 
+            /* return a nullptr iterator */
             iterator end()
             {
                 return iterator();
             }
 
+            /* return a const iterator to the end */
             reverse_iterator rbegin()
             {
                 return reverse_iterator(_root.getMaxKey(_root.getRoot()));
@@ -103,11 +106,34 @@ namespace ft
                 return reverse_iterator();
             }
 
+            /******************************************************* capacity ******************************************/
             /* return the tree size */
-            size_t Size()
+            size_t size() const
             {
                 return _root.Size();
             }
+
+            bool empty() const
+            {
+                return _root.Size();
+            }
+
+            size_type max_size() const
+            {return _root.maxSize();}
+
+            /****************************************************** element access ************************************/
+            map_type &operator[] (const key_type& k)
+            {
+                value_type p(k, map_type());
+
+                node b = _root.insert(p);
+
+                return b->data.second;
+                //(*((this->insert(make_pair(k,mapped_type()))).first)).second
+
+
+            }
+            
 
             ~map() {}
 

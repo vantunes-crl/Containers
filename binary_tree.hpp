@@ -126,11 +126,13 @@ namespace ft
                 return _size;
             }
 
+            size_t maxSize() const
+            {return _alloc.max_size();}
+
             ~binary_tree()
             {
                 clear(_root);
             }
-
 
         private:
             node _root;
