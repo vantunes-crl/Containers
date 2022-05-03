@@ -4,12 +4,13 @@
 #include <map>
 #include "map.hpp"
 
-using namespace ft;
+using namespace std;
 
 int main()
 {
 
     // std::map<int, char> map;
+    // std::map<int, char>::iterator it;
 
     // map.insert(make_pair(15, 'a'));
     // map.insert(make_pair(10, 'b'));
@@ -22,6 +23,18 @@ int main()
     // map.insert(make_pair(16, 'd'));
     // map.insert(make_pair(19, 'd'));
 
+    // it = map.begin();
+    // ++it;
+    // ++it;
+    // ++it;
+    // ++it;
+    // ++it;
+    // --it;
+    // --it;
+    // --it;
+
+
+    // std::cout << it->first << std::endl;
     // auto i = map.begin();
     // i++;
     // i++;
@@ -33,27 +46,30 @@ int main()
 
     //std::cout << "my binary tree---------------------\n\n";
     ft::map<int, char> bi;
-
     bi.insert(ft::make_pair(15, 'a'));
     bi.insert(ft::make_pair(10, 'b'));
     bi.insert(ft::make_pair(20, 'c'));
     bi.insert(ft::make_pair(18, 'd'));
-
     bi.insert(ft::make_pair(30, 'd'));
     bi.insert(ft::make_pair(12, 'd'));
     bi.insert(ft::make_pair(25, 'd'));
     bi.insert(ft::make_pair(8, 'd'));
     bi.insert(ft::make_pair(16, 'd'));
-    //auto p =  bi.insert(ft::make_pair(19, 'd'));
-    
-    // std::cout << p.first->first << p.second << std::endl;
-    
-    ft::map<int, char>::iterator it;
 
-    for (auto it = bi.begin(); it != bi.end(); ++it)
-        std::cout << it->first << it->second << std::endl;
+    // ft::map<int, char> map(bi.begin(), bi.end());
 
-    // for (auto i = 0; i != bi.Size(); ++i)
+    // //auto p =  bi.insert(ft::make_pair(19, 'd'));
+    // // std::cout << p.first->first << p.second << std::endl;
+
+    ft::map<int, char>::reverse_iterator it;
+    it = bi.rbegin();
+
+    std::cout << it->first << std::endl;
+
+    // for (it = map.begin(); it != map.end(); ++it)
+    //     std::cout << it->first << it->second << std::endl;
+
+    // for (auto i = 0; i != map.Size(); ++i)
     // {
     //     std::cout << it->first << it->second << std::endl;    
     //     ++it;

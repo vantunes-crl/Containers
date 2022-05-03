@@ -127,7 +127,9 @@ namespace ft
             }
 
             ~binary_tree()
-            {}
+            {
+                clear(_root);
+            }
         
             
         private:
@@ -135,15 +137,15 @@ namespace ft
             allocator_type _alloc;
             size_t _size;
 
-            // void clear(node root)
-            // {
-            //     if (root == nullptr)
-            //         return;
+            void clear(node root)
+            {
+                if (root == nullptr)
+                    return;
 
-            //     clear(root->left);
-            //     _alloc.deallocate(root, sizeof(root));
-            //     clear(root->right);
-            // }
+                clear(root->left);
+                _alloc.deallocate(root, sizeof(root));
+                clear(root->right);
+            }
 
     };
 
@@ -210,10 +212,119 @@ namespace ft
                 return *this;
             }
 
+            /* pos increment operator */
+            iterator_tree operator++(int)
+            {
+                iterator_tree temp = *this;
+                ++*this;
+                return (temp);
+            }
+
+            iterator_tree &operator--()
+            {
+                /* if _root is null means we are int he root */
+                if (_root == nullptr)
+                    return *this;
+
+                /*if right of the leaf is diferent we go to the end of the leaf left */
+                if (_root->left != nullptr)
+                {
+                    binary_tree<T> b;
+                    _root = b.getMaxKey(_root->left);
+                } 
+                else 
+                {
+                    node parent = _root->parent;
+                    while (parent != nullptr && _root == parent->left) 
+                    {
+                        _root = parent;
+                        parent = parent->parent;
+                    }
+                    _root = parent;
+                }
+                return *this;
+            }
+
+            iterator_tree operator--(int)
+            {
+                iterator_tree temp = *this;
+                --*this;
+                return (temp);
+            }
 
             ~iterator_tree() {}
         private:
             node _root;
+    };
+
+    template<class Iterator>
+    class bst_reverse_iterator
+    {
+        public:
+            typedef Iterator iterator_type;
+            typedef typename iterator_traits<Iterator>::iterator_category iterator_category;
+            typedef typename iterator_traits<Iterator>::value_type value_type;
+            typedef typename iterator_traits<Iterator>::difference_type difference_type;
+            typedef typename iterator_traits<Iterator>::pointer pointer;
+            typedef typename iterator_traits<Iterator>::reference reference;
+
+            bst_reverse_iterator():_base(iterator_type())
+            {}
+
+            explicit bst_reverse_iterator(iterator_type it) : _base(it) {}
+
+            template <class Iter>
+            bst_reverse_iterator(const bst_reverse_iterator<Iter> &rev_it) : _base(rev_it._base) {}
+
+            bool operator==(const bst_reverse_iterator &obj2) const
+            {return _base == obj2._base;}
+
+            bool operator !=(const bst_reverse_iterator &obj2) const
+            {return !(*this == obj2);}
+
+            pointer operator->()
+            {return _base->data;}
+            
+            reference operator*() const
+            {return *_base;}
+
+            bst_reverse_iterator &operator=(const bst_reverse_iterator &new_object)
+            {
+                _base = new_object._base;
+                return (*this);
+            }
+
+            /* forward iterator */
+            bst_reverse_iterator &operator++()
+            {
+                --_base;
+                return *this;
+            }
+
+            /* pos increment operator */
+            bst_reverse_iterator operator++(int)
+            {
+                bst_reverse_iterator temp = *this;
+                --*this;
+                return (temp);
+            }
+
+            bst_reverse_iterator &operator--()
+            {
+                ++_base;
+                return *this;
+            }
+
+            bst_reverse_iterator operator--(int)
+            {
+                bst_reverse_iterator temp = *this;
+                --*this;
+                return (temp);
+            }
+
+        private:
+            iterator_type _base;
+
     };
 }
 

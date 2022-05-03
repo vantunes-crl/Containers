@@ -29,14 +29,35 @@ namespace ft
             /* iterators */
             typedef iterator_tree<value_type> iterator;
             typedef iterator_tree<const value_type> const_iterator;
-            typedef reverse_iterator<const_iterator> const_reverse_iterator;
-            typedef reverse_iterator<iterator> reverse_iterator;
+            typedef bst_reverse_iterator<const_iterator> const_reverse_iterator;
+            typedef bst_reverse_iterator<iterator> reverse_iterator;
             typedef typename iterator_traits<iterator>::difference_type difference_type;
 
-            explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-            :_size(0)
+
+            /*********************************************** Constructors **********************************/
+            /* default constructor */
+            explicit map (const key_compare &comp = key_compare(), const allocator_type& alloc = allocator_type())
             {}
 
+            /* Range constructor */
+            template <class InputIterator>
+            map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+            {
+                while (first != last)
+                {
+                    _root.insert(make_pair(first->first, first->second));
+                    ++first;
+                }
+            }
+
+            /* Cpy constructor */
+            map(const map& x)
+            {
+                *this = x;
+            }
+
+            /* insert that verify if the key exists if not insert the data */
+            /* return a pair with a interator to the data and false if the key alread exists otherwise true */
             pair<iterator, bool> insert (const value_type& val)
             {   
                 node p = _root.findKey(val);
@@ -47,29 +68,41 @@ namespace ft
                 return make_pair(iterator(p), true);
             }
 
+            /***************************** iterators *********************************/
+
+            /* return the minimum left key , inorder */
             iterator begin()
             {
                 return (iterator(_root.getMinKey(_root.getRoot())));
             }
 
+            /* return a nullptr iterator */
             iterator end()
             {
                 return iterator();
             }
 
+            const_reverse_iterator rbegin()
+            {
+                return const_reverse_iterator(_root.getMaxKey(_root.getRoot()));
+            }
+
+            /* return a nullptr iterator */
+            reverse_iterator rend()
+            {
+                return reverse_iterator(_root.getMinKey(_root.getRoot()));
+            }
+
+            /* return the tree size */
             size_t Size()
             {
                 return _root.Size();
             }
 
-
             ~map() {}
 
         private:
-            size_type _size;
             bst _root;
-            
-
 
     };
 }
