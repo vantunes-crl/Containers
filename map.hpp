@@ -43,10 +43,7 @@ namespace ft
                 if (p == nullptr)
                     p = _root.insert(val);
                 else
-                {
-                    std::cout << p->data.first << std::endl;
                     return make_pair(iterator(p), false);
-                }
                 return make_pair(iterator(p), true);
             }
 
@@ -57,7 +54,12 @@ namespace ft
 
             iterator end()
             {
-                return (iterator(_root.getMaxKey(_root.getRoot())));
+                return iterator();
+            }
+
+            size_t Size()
+            {
+                return _root.Size();
             }
 
 

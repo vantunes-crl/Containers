@@ -5,7 +5,7 @@
 #include "iterator/iterator.hpp"
 
 namespace ft
-{
+{   /* Tree type to create a binary tree, with parent to help in interator, because we can move back in the tree  */
     template <class T>
     struct Tree
     {
@@ -28,42 +28,53 @@ namespace ft
             typedef Alloc allocator_type;
             typedef Tree<T> * node;
 
+            /* Constructors */
             binary_tree():_root(nullptr), _size(0)
             {}
 
+            /*insert function to insert data in the binary tree */
             node insert(T data)
             {
+                /* if the tree is empty creates a root */
                 if (_root == nullptr)
                 {
                     _root = _alloc.allocate(1);
                     _alloc.construct(_root, Tree<T>(data));
+                    ++_size;
                     return _root;
                 }
                 
+                /* create a new 2 nodes copys to hold the previus data and current data */
                 node curr;
                 node prev;
-
                 curr = _root;
 
+                /* run the entery tree to find the positon to place */
                 while (curr != nullptr)
                 {
+                    /* goes to the left or right depends os the size of the data */
+                    /* left smaller right bigger */
+                    /* and always save the previus node*/
                     prev = curr;
-                    if (curr->data > data)
+                    if (curr->data.first > data.first)
                         curr = curr->left;
                     else
                         curr = curr->right;
                 }
-
-                if (prev->data > data)
+                
+                /* alloc memory and create a new node and check the leaf to be placed based on the data size */
+                if (prev->data.first > data.first)
                 {
                     prev->left = _alloc.allocate(1);
                     _alloc.construct(prev->left, Tree<T>(data, prev));
+                    ++_size;
                     return prev->left;
                 }
                 else
                 {
                     prev->right = _alloc.allocate(1);
                     _alloc.construct(prev->right, Tree<T>(data, prev));
+                    ++_size;
                     return prev->right;
                 }
             }
@@ -71,17 +82,17 @@ namespace ft
             node findKey(T Key)
             {
                 node curr = _root;
-                node parent = nullptr;
 
-                while (curr != nullptr && curr->data.first != Key.first)
+                while (curr != nullptr)
                 {
-                    parent = curr;
-                    if (Key < curr->data)
+                    if (curr->data.first == Key.first)
+                        return curr;
+                    if (Key.first < curr->data.first)
                         curr = curr->left;
                     else
                         curr = curr->right;
                 }
-                return parent;
+                return nullptr;
             }
 
             node getMinKey(node curr)
@@ -108,6 +119,11 @@ namespace ft
             allocator_type getAllocator()
             {
                 return _alloc;
+            }
+
+            size_t Size()
+            {
+                return _size;
             }
 
             ~binary_tree()
@@ -145,7 +161,7 @@ namespace ft
             typedef bidirectional_iterator_tag iterator_category;
             typedef Tree<T> * node;
 
-            iterator_tree() {}
+            iterator_tree():_root(nullptr) {}
 
             iterator_tree(node root):_root(root)
             {}
@@ -168,29 +184,30 @@ namespace ft
                 return (*this);
             }
 
+            /* forward iterator */
             iterator_tree &operator++()
             {
+                /* if _root is null means we are int he root */
                 if (_root == nullptr)
                     return *this;
 
-                if (_root->right == nullptr)
-                {
-                    if (_root->data.first > _root->parent->data.first)
-                    {
-                        while (_root->data.first > _root->parent->data.first && _root->parent->parent)
-                            _root = _root->parent;
-                        _root = _root->parent;
-                    }
-                    else
-                        _root = _root->parent;
-                    return *this;
-                }
-                else
+                /*if right of the leaf is diferent we go to the end of the leaf right */
+                if (_root->right != nullptr)
                 {
                     binary_tree<T> b;
                     _root = b.getMinKey(_root->right);
-                    return *this;
+                } 
+                else 
+                {
+                    node parent = _root->parent;
+                    while (parent != nullptr && _root == parent->right) 
+                    {
+                        _root = parent;
+                        parent = parent->parent;
+                    }
+                    _root = parent;
                 }
+                return *this;
             }
 
 
