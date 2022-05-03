@@ -64,10 +64,14 @@ int main()
     ft::map<int, char>::reverse_iterator it;
     it = bi.rbegin();
 
-    std::cout << it->first << std::endl;
+    //it->first;
 
-    // for (it = map.begin(); it != map.end(); ++it)
-    //     std::cout << it->first << it->second << std::endl;
+    //std::cout  << it->first << std::endl;
+
+    //std::cout << it->first << std::endl;
+
+    for (it = bi.rbegin(); it != bi.rend(); ++it)
+        std::cout << it->first << it->second << std::endl;
 
     // for (auto i = 0; i != map.Size(); ++i)
     // {

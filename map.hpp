@@ -76,21 +76,31 @@ namespace ft
                 return (iterator(_root.getMinKey(_root.getRoot())));
             }
 
+            const_iterator begin() const
+            {
+                return (iterator(_root.getMinKey(_root.getRoot())));
+            }
+
             /* return a nullptr iterator */
+            const_iterator end() const
+            {
+                return iterator();
+            }
+
             iterator end()
             {
                 return iterator();
             }
 
-            const_reverse_iterator rbegin()
+            reverse_iterator rbegin()
             {
-                return const_reverse_iterator(_root.getMaxKey(_root.getRoot()));
+                return reverse_iterator(_root.getMaxKey(_root.getRoot()));
             }
 
             /* return a nullptr iterator */
             reverse_iterator rend()
             {
-                return reverse_iterator(_root.getMinKey(_root.getRoot()));
+                return reverse_iterator();
             }
 
             /* return the tree size */

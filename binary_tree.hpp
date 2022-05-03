@@ -43,7 +43,7 @@ namespace ft
                     ++_size;
                     return _root;
                 }
-                
+
                 /* create a new 2 nodes copys to hold the previus data and current data */
                 node curr;
                 node prev;
@@ -61,7 +61,7 @@ namespace ft
                     else
                         curr = curr->right;
                 }
-                
+
                 /* alloc memory and create a new node and check the leaf to be placed based on the data size */
                 if (prev->data.first > data.first)
                 {
@@ -130,8 +130,8 @@ namespace ft
             {
                 clear(_root);
             }
-        
-            
+
+
         private:
             node _root;
             allocator_type _alloc;
@@ -176,9 +176,9 @@ namespace ft
 
             pointer operator->()
             {return &_root->data;}
-            
+
             reference operator*() const
-            {return *_root->data;}
+            {return _root->data;}
 
             iterator_tree &operator=(const iterator_tree &new_object)
             {
@@ -198,11 +198,11 @@ namespace ft
                 {
                     binary_tree<T> b;
                     _root = b.getMinKey(_root->right);
-                } 
-                else 
+                }
+                else
                 {
                     node parent = _root->parent;
-                    while (parent != nullptr && _root == parent->right) 
+                    while (parent != nullptr && _root == parent->right)
                     {
                         _root = parent;
                         parent = parent->parent;
@@ -231,11 +231,11 @@ namespace ft
                 {
                     binary_tree<T> b;
                     _root = b.getMaxKey(_root->left);
-                } 
-                else 
+                }
+                else
                 {
                     node parent = _root->parent;
-                    while (parent != nullptr && _root == parent->left) 
+                    while (parent != nullptr && _root == parent->left)
                     {
                         _root = parent;
                         parent = parent->parent;
@@ -283,8 +283,8 @@ namespace ft
             {return !(*this == obj2);}
 
             pointer operator->()
-            {return _base->data;}
-            
+            {return &(operator*());}
+
             reference operator*() const
             {return *_base;}
 
