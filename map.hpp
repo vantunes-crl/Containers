@@ -45,7 +45,7 @@ namespace ft
             {
                 while (first != last)
                 {
-                    _root.insert(make_pair(first->first, first->second));
+                    this->insert(make_pair(first->first, first->second));
                     ++first;
                 }
             }
@@ -55,6 +55,8 @@ namespace ft
             {
                 *this = x;
             }
+
+            /******************************* modifiers *****************************************/
 
             /* insert that verify if the key exists if not insert the data */
             /* return a pair with a interator to the data and false if the key alread exists otherwise true */
@@ -67,6 +69,25 @@ namespace ft
                     return make_pair(iterator(p), false);
                 return make_pair(iterator(p), true);
             }
+
+            /* insert and return a iterator to the position */
+            iterator insert (iterator position, const value_type &val)
+            {
+                pair<iterator, bool> p = insert(val);
+                return p.first;
+            }
+
+            /* insert in a range of elements */
+            template <class InputIterator>
+            void insert (InputIterator first, InputIterator last)
+            {
+                while (first != last)
+                {
+                    this->insert(make_pair(first->first, first->second));
+                    ++first;
+                }
+            }
+
 
             /***************************** iterators *********************************/
 
@@ -122,17 +143,13 @@ namespace ft
             {return _root.maxSize();}
 
             /****************************************************** element access ************************************/
-            map_type &operator[] (const key_type& k)
+            map_type &operator[] (const key_type &k)
             {
-                value_type p(k, map_type());
-
-                node b = _root.insert(p);
-
-                return b->data.second;
-                //(*((this->insert(make_pair(k,mapped_type()))).first)).second
-
-
+                pair<iterator, bool> p = insert(make_pair(k, map_type()));
+                return p.first->second;
             }
+
+
             
 
             ~map() {}

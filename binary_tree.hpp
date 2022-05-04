@@ -121,7 +121,7 @@ namespace ft
                 return _alloc;
             }
 
-            size_t Size()
+            size_t Size() const
             {
                 return _size;
             }

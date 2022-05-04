@@ -45,30 +45,42 @@ int main()
 
 
     //std::cout << "my binary tree---------------------\n\n";
-    ft::map<int, char> bi;
-    bi.insert(ft::make_pair(15, 'a'));
-    bi.insert(ft::make_pair(10, 'b'));
-    bi.insert(ft::make_pair(20, 'c'));
-    bi.insert(ft::make_pair(18, 'd'));
-    bi.insert(ft::make_pair(30, 'd'));
-    bi.insert(ft::make_pair(12, 't'));
-    bi.insert(ft::make_pair(25, 'd'));
-    bi.insert(ft::make_pair(8, 'd'));
-    bi.insert(ft::make_pair(16, 'd'));
+    map<int, char> bi;
+    bi.insert(make_pair(15, 'a'));
+    bi.insert(make_pair(10, 'b'));
+    bi.insert(make_pair(20, 'c'));
+    bi.insert(make_pair(18, 'd'));
+    bi.insert(make_pair(30, 'd'));
+    bi.insert(make_pair(12, 't'));
+    bi.insert(make_pair(25, 'd'));
+    bi.insert(make_pair(8, 'd'));
+    bi.insert(make_pair(16, 'd'));
 
-    // ft::map<int, char> map(bi.begin(), bi.end());
+    // map<int, char> map(bi.begin(), bi.end());
 
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
-    ft::map<int, char>::iterator it;
-    
+    map<int, char>::iterator it;
+    // map<int, char> be;
+
+    // be.insert(bi.begin(), bi.end());
+
+    // for (it = be.begin(); it != be.end(); ++it)
+    //     std::cout << it->first << it->second << std::endl;
 
     //std::cout << bi.max_size() << std::endl;
 
-    bi[12] = 'a';
+    // char c = bi[15] = 'b';
+    // std::cout << c << std::endl;
+    // std::cout << "size " << bi.size() << std::endl;
     it = bi.begin();
+
+
+   
     // //it->first;
+    bi.insert(it, make_pair(13,'c'));
+
 
     // //std::cout  << it->first << std::endl;
 
