@@ -80,8 +80,8 @@ namespace ft
                 }
             }
 
-
-            void deleteNode(T key)
+            template< class K > 
+            void deleteNode(K key)
             {
                 node curr = findKey(key);
 
@@ -109,28 +109,55 @@ namespace ft
                     std::cout << "case 2 \n";
                     node successor = getMinKey(curr->right);
 
+                    /* save the successor data */
                     T data = successor->data;
-                    //std::cout << data.first << std::endl;
-                    deleteNode(successor->data);
-
-                    auto *ptr = const_cast<int *>(&curr->data.first);
-
+                    /* call recursive function to delete the data */
+                    deleteNode(successor->data.first);
+                    /* const cast to a pointer to modify a const value ex: pair<const key, val> change to pair<key, val> and overide the const key */
+                    K *ptr = const_cast<K *>(&curr->data.first);
                     *ptr = data.first;
+                    curr->data.second = data.second;
+                }
+                else // Case 3: node to be deleted has only one child
+                {
+                    std::cout << "case 3\n";
+                    node child;
 
-                   //std::cout << curr->data.first << std::endl ;
+                    //choose child
+                    if (curr->left)
+                        child = curr->left; //aqui
+                    else
+                        child = curr->right;
+                    
+                    if (curr != _root)
+                    {
+                        //std::cout << curr->data.first << "curr" << std::endl;
+                        std::cout << curr->parent->data.first << " parent " << std::endl;
+                        std::cout << curr->parent->left->data.first << " left" << std::endl;
+                        std::cout << curr->parent->right->data.first << " right" << std::endl;
+                        std::cout << child->data.first << " child" << std::endl;
 
+                        if (curr->parent->left)
+                            curr->parent->left = child;
+                        else
+                            curr->parent->right = child;
+                    }
+                    else
+                        _root = child;
+                    delete curr;
                 }
             }
 
-            node findKey(T Key)
+            template < class K>
+            node findKey(K Key)
             {
                 node curr = _root;
 
                 while (curr != nullptr)
                 {
-                    if (curr->data.first == Key.first)
+                    if (curr->data.first == Key)
                         return curr;
-                    if (Key.first < curr->data.first)
+                    if (Key < curr->data.first)
                         curr = curr->left;
                     else
                         curr = curr->right;

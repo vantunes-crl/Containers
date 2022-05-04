@@ -61,7 +61,7 @@ int main()
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
-    bi.remove(make_pair(10, 'a'));
+    bi.erase(18);
     map<int, char>::iterator it;
     // map<int, char> be;
 
@@ -72,7 +72,7 @@ int main()
 
     //std::cout << bi.max_size() << std::endl;
 
-    // char c = bi[15] = 'b';
+    //char c = bi[15] = 'b';
     // std::cout << c << std::endl;
     // std::cout << "size " << bi.size() << std::endl;
     it = bi.begin();

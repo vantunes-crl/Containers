@@ -60,9 +60,9 @@ namespace ft
 
             /* insert that verify if the key exists if not insert the data */
             /* return a pair with a interator to the data and false if the key alread exists otherwise true */
-            pair<iterator, bool> insert (const value_type& val)
+            pair<iterator, bool> insert (const value_type &val)
             {   
-                node p = _root.findKey(val);
+                node p = _root.findKey(val.first);
                 if (p == nullptr)
                     p = _root.insert(val);
                 else
@@ -88,10 +88,18 @@ namespace ft
                 }
             }
 
-            void remove(value_type key)
+            size_t erase(const key_type &k)
             {
-                _root.deleteNode(key);
+                _root.deleteNode(k);
+
+                return 1;
             }
+
+            void erase (iterator position);
+
+
+            void erase (iterator first, iterator last);
+
 
             /***************************** iterators *********************************/
 
@@ -153,8 +161,6 @@ namespace ft
                 return p.first->second;
             }
 
-
-            
 
             ~map() {}
 
