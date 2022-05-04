@@ -88,6 +88,10 @@ namespace ft
                 }
             }
 
+            void remove(value_type key)
+            {
+                _root.deleteNode(key);
+            }
 
             /***************************** iterators *********************************/
 

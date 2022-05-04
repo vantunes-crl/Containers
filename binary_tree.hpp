@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "iterator/iterator.hpp"
+#include <typeinfo>
 
 namespace ft
 {   /* Tree type to create a binary tree, with parent to help in interator, because we can move back in the tree  */
@@ -79,6 +80,48 @@ namespace ft
                 }
             }
 
+
+            void deleteNode(T key)
+            {
+                node curr = findKey(key);
+
+                if (curr == nullptr)
+                    return;
+                // Case 1: node to be deleted has no children, i.e., it is a leaf node
+                if (curr->left == nullptr && curr->right == nullptr)
+                {
+                    std::cout << "case 1\n";
+                    // if the node to be deleted is not a root node, then set its
+                    // parent left/right child to null
+                    if (curr != _root)
+                    {
+                        if (curr->parent->left == curr)
+                            curr->parent->left = nullptr;
+                        else
+                            curr->parent->right = nullptr;
+                    }
+                    else
+                        _root = nullptr;
+                    delete curr;
+                }
+                else if (curr->left && curr->right) // Case 2: node to be deleted has two children
+                {
+                    std::cout << "case 2 \n";
+                    node successor = getMinKey(curr->right);
+
+                    T data = successor->data;
+                    //std::cout << data.first << std::endl;
+                    deleteNode(successor->data);
+
+                    auto *ptr = const_cast<int *>(&curr->data.first);
+
+                    *ptr = data.first;
+
+                   //std::cout << curr->data.first << std::endl ;
+
+                }
+            }
+
             node findKey(T Key)
             {
                 node curr = _root;
@@ -145,7 +188,7 @@ namespace ft
                     return;
 
                 clear(root->left);
-                _alloc.deallocate(root, sizeof(root));
+                _alloc.deallocate(root, 1);
                 clear(root->right);
             }
 

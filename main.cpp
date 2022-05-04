@@ -4,7 +4,7 @@
 #include <map>
 #include "map.hpp"
 
-using namespace std;
+using namespace ft;
 
 int main()
 {
@@ -61,6 +61,7 @@ int main()
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
+    bi.remove(make_pair(10, 'a'));
     map<int, char>::iterator it;
     // map<int, char> be;
 
@@ -79,7 +80,7 @@ int main()
 
    
     // //it->first;
-    bi.insert(it, make_pair(13,'c'));
+   // bi.insert(it, make_pair(13,'c'));
 
 
     // //std::cout  << it->first << std::endl;
