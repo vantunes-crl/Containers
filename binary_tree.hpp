@@ -10,7 +10,7 @@ namespace ft
     template <class T>
     struct Tree
     {
-        Tree(T data, Tree * parent)
+        Tree(const T data, Tree * parent)
         :data(data), left(nullptr), right(nullptr), parent(parent) {}
 
         Tree(T data)
@@ -114,8 +114,7 @@ namespace ft
                     /* call recursive function to delete the data */
                     deleteNode(successor->data.first);
                     /* const cast to a pointer to modify a const value ex: pair<const key, val> change to pair<key, val> and overide the const key */
-                    K *ptr = const_cast<K *>(&curr->data.first);
-                    *ptr = data.first;
+                    const_cast<K &>(curr->data.first) = data.first;
                     curr->data.second = data.second;
                 }
                 else // Case 3: node to be deleted has only one child

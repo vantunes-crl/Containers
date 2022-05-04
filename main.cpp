@@ -61,7 +61,7 @@ int main()
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
-    bi.erase(18);
+    bi.erase(10);
     map<int, char>::iterator it;
     // map<int, char> be;
 
