@@ -33,6 +33,16 @@ namespace ft
             binary_tree():_root(nullptr), _size(0)
             {}
 
+            binary_tree &operator=(const binary_tree &cpy)
+            {
+                this->~binary_tree();
+                _alloc = cpy._alloc;
+                _size = cpy._size;
+
+                ft_cpy(cpy._root);
+                return *this;
+            }
+
             /*insert function to insert data in the binary tree */
             node insert(T data)
             {
@@ -168,8 +178,8 @@ namespace ft
 
             node getMinKey(node curr)
             {
-                if (_size)
-                    return nullptr;
+                if (curr == nullptr)
+                    return curr;
                 while (curr->left != nullptr) {
                     curr = curr->left;
                 }
@@ -204,7 +214,17 @@ namespace ft
 
             ~binary_tree()
             {
-                clear(_root);
+               clear(_root);
+            }
+
+            void ft_cpy(node root)
+            {
+                if (root == nullptr)
+                    return;
+
+                ft_cpy(root->left);
+                insert(root->data);
+                ft_cpy(root->right);
             }
 
         private:
@@ -277,7 +297,7 @@ namespace ft
                 else
                 {
                     node parent = _root->parent;
-                    while (parent != nullptr && _root == parent->right)
+                    while (parent != nullptr && _root == parent->right) 
                     {
                         _root = parent;
                         parent = parent->parent;

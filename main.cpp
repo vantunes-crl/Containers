@@ -46,6 +46,8 @@ int main()
 
     //std::cout << "my binary tree---------------------\n\n";
     map<int, char> bi;
+    map<int, char> be;
+    
     bi.insert(make_pair(15, 'a'));
     bi.insert(make_pair(10, 'b'));
     bi.insert(make_pair(20, 'c'));
@@ -57,6 +59,14 @@ int main()
     bi.insert(make_pair(16, 'd'));
     bi.insert(make_pair(17, 'd'));
 
+    be.insert(make_pair(40, 'd'));
+    be.insert(make_pair(31, 'd'));
+    be.insert(make_pair(29, 'd'));
+    be.insert(make_pair(8, 'd'));
+    //bi.swap(be);
+
+    bi = be;
+
 
     // map<int, char> map(bi.begin(), bi.end());
 
@@ -67,7 +77,7 @@ int main()
     map<int, char>::iterator it;
     it = bi.begin();
 
-    bi.erase(bi.begin(), bi.end());
+    //bi.erase(bi.begin(), bi.end());
     // map<int, char> be;
 
     // be.insert(bi.begin(), bi.end());

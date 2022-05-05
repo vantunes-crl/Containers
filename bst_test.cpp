@@ -45,8 +45,8 @@ int main()
 
 
     std::cout << "my binary tree---------------------\n\n";
-    binary_tree<pair<int, char>> bi;
-    iterator_tree<pair<int, char>> it;
+    binary_tree<pair<int, char> > bi;
+    iterator_tree<pair<int, char> > it;
 
     //bst_iterator<ft::pair<int, char>> it;
 
@@ -65,10 +65,20 @@ int main()
     bi.insert(ft::make_pair(19, 'a'));
     bi.insert(ft::make_pair(22, 'a'));
 
-    it = bi.getRoot();
+    binary_tree<pair<int, char> > be;
+    be = bi;
 
-    ++it;
-    std::cout << it->first << std::endl;
+
+    for (it = be.getMinKey(be.getRoot()); it != be.getMaxKey(be.getRoot()); ++it)
+        std::cout << it->first << std::endl;
+    
+    std::cout << "second tree\n";
+
+    for (it = bi.getMinKey(bi.getRoot()); it != bi.getMaxKey(bi.getRoot()); ++it)
+        std::cout << it->first << std::endl;
+    
+
+    
 
    
 }

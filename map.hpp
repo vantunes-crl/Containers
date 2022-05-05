@@ -56,6 +56,14 @@ namespace ft
                 *this = x;
             }
 
+            /******************************** operator overload *********************************/
+
+            map &operator=(const map &cpy)
+            {
+                _root = cpy._root;
+                return *this;
+            }
+
             /******************************* modifiers *****************************************/
 
             /* insert that verify if the key exists if not insert the data */
@@ -109,6 +117,13 @@ namespace ft
                 }
             }
 
+            // void swap (map &x)
+            // {
+            //     map<key_type, map_type> temp;
+            //     temp = *this;
+            //     *this = x;
+            //     x = temp;
+            // }
 
             /***************************** iterators *********************************/
 
