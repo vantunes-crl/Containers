@@ -81,12 +81,12 @@ namespace ft
             }
 
             template< class K > 
-            void deleteNode(K key)
+            size_t deleteNode(K key)
             {
                 node curr = findKey(key);
 
                 if (curr == nullptr)
-                    return;
+                    return 0;
                 // Case 1: node to be deleted has no children, i.e., it is a leaf node
                 if (curr->left == nullptr && curr->right == nullptr)
                 {
@@ -101,7 +101,8 @@ namespace ft
                     }
                     else
                         _root = nullptr;
-                    delete curr;
+                    //_alloc.deallocate(curr, 1);
+                    //--_size;
                 }
                 else if (curr->left && curr->right) // Case 2: node to be deleted has two children
                 {
@@ -144,6 +145,8 @@ namespace ft
                         _root = child;
                    _alloc.deallocate(curr, 1);
                 }
+                --_size;
+                return 1;
             }
 
             template < class K>
@@ -165,6 +168,8 @@ namespace ft
 
             node getMinKey(node curr)
             {
+                if (_size)
+                    return nullptr;
                 while (curr->left != nullptr) {
                     curr = curr->left;
                 }

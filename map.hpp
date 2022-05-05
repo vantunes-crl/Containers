@@ -90,15 +90,24 @@ namespace ft
 
             size_t erase(const key_type &k)
             {
-                _root.deleteNode(k);
-
-                return 1;
+                if (_root.deleteNode(k))
+                    return 1;
+                return 0;
             }
 
-            void erase (iterator position);
+            void erase (iterator position)
+            {
+                erase(position->first);
+            }
 
-
-            void erase (iterator first, iterator last);
+            void erase (iterator first, iterator last)
+            {
+                while (first != last)
+                {
+                    erase(first->first);
+                    ++first;
+                }
+            }
 
 
             /***************************** iterators *********************************/

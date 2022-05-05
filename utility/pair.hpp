@@ -17,13 +17,15 @@ namespace ft
         template<class _U1, class _U2>
         pair(const pair<_U1, _U2>& __p) : first(__p.first), second(__p.second) { }
 
-        pair &operator=(const pair &pr)
-        {
-            first = pr.first;
-            second = pr.second;
-            return (*this);
-        }
-
+        /* definition of implicit copy constructor for 'pair<int, char>' is deprecated because it
+        has a user-provided copy assignment operator 
+        [-Werror,-Wdeprecated-copy-with-user-provided-copy] */
+        // pair &operator=(const pair &pr) 
+        // {
+        //     first = pr.first;
+        //     second = pr.second;
+        //     return (*this);
+        // }
     };
 
     template <class T1, class T2>

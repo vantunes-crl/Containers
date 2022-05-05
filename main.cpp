@@ -63,8 +63,11 @@ int main()
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
-    bi.erase(16);
+    
     map<int, char>::iterator it;
+    it = bi.begin();
+
+    bi.erase(bi.begin(), bi.end());
     // map<int, char> be;
 
     // be.insert(bi.begin(), bi.end());
@@ -77,7 +80,7 @@ int main()
     //char c = bi[15] = 'b';
     // std::cout << c << std::endl;
     // std::cout << "size " << bi.size() << std::endl;
-    it = bi.begin();
+    //it = bi.begin();
 
 
    
@@ -89,6 +92,8 @@ int main()
 
     // //std::cout << it->first << std::endl;
 
+    //std::cout << bi.empty();
+    //std::cout << bi.size() << std::endl;
     for (it = bi.begin(); it != bi.end(); ++it)
         std::cout << it->first << it->second << std::endl;
 
