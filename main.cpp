@@ -55,13 +55,15 @@ int main()
     bi.insert(make_pair(25, 'd'));
     bi.insert(make_pair(8, 'd'));
     bi.insert(make_pair(16, 'd'));
+    bi.insert(make_pair(17, 'd'));
+
 
     // map<int, char> map(bi.begin(), bi.end());
 
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
-    bi.erase(10);
+    bi.erase(16);
     map<int, char>::iterator it;
     // map<int, char> be;
 

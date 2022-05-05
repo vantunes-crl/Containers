@@ -90,7 +90,6 @@ namespace ft
                 // Case 1: node to be deleted has no children, i.e., it is a leaf node
                 if (curr->left == nullptr && curr->right == nullptr)
                 {
-                    std::cout << "case 1\n";
                     // if the node to be deleted is not a root node, then set its
                     // parent left/right child to null
                     if (curr != _root)
@@ -106,7 +105,6 @@ namespace ft
                 }
                 else if (curr->left && curr->right) // Case 2: node to be deleted has two children
                 {
-                    std::cout << "case 2 \n";
                     node successor = getMinKey(curr->right);
 
                     /* save the successor data */
@@ -119,31 +117,32 @@ namespace ft
                 }
                 else // Case 3: node to be deleted has only one child
                 {
-                    std::cout << "case 3\n";
                     node child;
 
                     //choose child
                     if (curr->left)
-                        child = curr->left; //aqui
+                        child = curr->left;
                     else
                         child = curr->right;
                     
+                    /* if is not the root */
                     if (curr != _root)
                     {
-                        //std::cout << curr->data.first << "curr" << std::endl;
-                        std::cout << curr->parent->data.first << " parent " << std::endl;
-                        std::cout << curr->parent->left->data.first << " left" << std::endl;
-                        std::cout << curr->parent->right->data.first << " right" << std::endl;
-                        std::cout << child->data.first << " child" << std::endl;
-
-                        if (curr->parent->left)
-                            curr->parent->left = child;
+                        /* if the child is on the left/right set parent to child and parent to the proccessor parent */
+                        if (curr->parent->left == curr)
+                        {
+                            child->parent = curr->parent;
+                            curr->parent->left = child;            
+                        }
                         else
+                        {
+                            child->parent = curr->parent;
                             curr->parent->right = child;
+                        }
                     }
-                    else
+                    else /* if is the root */
                         _root = child;
-                    delete curr;
+                   _alloc.deallocate(curr, 1);
                 }
             }
 
