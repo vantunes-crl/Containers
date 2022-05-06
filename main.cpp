@@ -64,9 +64,9 @@ int main()
     be.insert(make_pair(90, 'd'));
     be.insert(make_pair(22, 'd'));
     be.insert(make_pair(50, 'd'));
-    //bi.swap(be);
+    bi.swap(be);
 
-    bi = be;
+    //bi = be;
 
 
     // map<int, char> map(bi.begin(), bi.end());
@@ -74,9 +74,10 @@ int main()
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
-    
+    bi.clear();
     map<int, char>::iterator it;
-    it = bi.begin();
+    //it = bi.begin();
+
 
     //bi.erase(bi.begin(), bi.end());
     // map<int, char> be;
@@ -104,8 +105,8 @@ int main()
     // //std::cout << it->first << std::endl;
 
     //std::cout << bi.empty();
-    std::cout << bi.size() << std::endl;
-    std::cout << be.size() << std::endl;
+    // std::cout << bi.size() << std::endl;
+    // std::cout << be.size() << std::endl;
     
     for (it = bi.begin(); it != bi.end(); ++it)
         std::cout << it->first << it->second << std::endl;

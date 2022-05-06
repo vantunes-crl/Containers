@@ -117,13 +117,20 @@ namespace ft
                 }
             }
 
-            // void swap (map &x)
-            // {
-            //     map<key_type, map_type> temp;
-            //     temp = *this;
-            //     *this = x;
-            //     x = temp;
-            // }
+            /* swap contents */
+            void swap (map &x)
+            {
+                map<key_type, map_type> temp;
+                temp = *this;
+                *this = x;
+                x = temp;
+            }
+
+            /* clear all data */
+            void clear()
+            {
+                _root.clear2(_root.getRoot());
+            }
 
             /***************************** iterators *********************************/
 
