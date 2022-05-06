@@ -46,6 +46,7 @@ int main()
 
     std::cout << "my binary tree---------------------\n\n";
     binary_tree<pair<int, char> > bi;
+    binary_tree<pair<int, char> > be;
     iterator_tree<pair<int, char> > it;
 
     //bst_iterator<ft::pair<int, char>> it;
@@ -65,7 +66,12 @@ int main()
     bi.insert(ft::make_pair(19, 'a'));
     bi.insert(ft::make_pair(22, 'a'));
 
-    binary_tree<pair<int, char> > be;
+    be.insert(ft::make_pair(31, 'a'));
+    be.insert(ft::make_pair(50, 'a'));
+    be.insert(ft::make_pair(90, 'a'));
+    be.insert(ft::make_pair(20, 'a'));
+
+   // binary_tree<pair<int, char> > be;
     be = bi;
 
 

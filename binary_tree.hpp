@@ -35,12 +35,21 @@ namespace ft
 
             binary_tree &operator=(const binary_tree &cpy)
             {
-                this->~binary_tree();
+                clear2(_root);
                 _alloc = cpy._alloc;
-                _size = cpy._size;
-
                 ft_cpy(cpy._root);
+                _size = cpy._size;
                 return *this;
+            }
+
+            void clear2(node root)
+            {
+                if (root == nullptr)    
+                    return;
+                
+                clear2(root->left);
+                clear2(root->right);
+                deleteNode(root->data.first);
             }
 
             /*insert function to insert data in the binary tree */
@@ -111,8 +120,8 @@ namespace ft
                     }
                     else
                         _root = nullptr;
-                    //_alloc.deallocate(curr, 1);
-                    //--_size;
+                    _alloc.deallocate(curr, 1);
+                    --_size;
                 }
                 else if (curr->left && curr->right) // Case 2: node to be deleted has two children
                 {
@@ -236,10 +245,9 @@ namespace ft
             {
                 if (root == nullptr)
                     return;
-
                 clear(root->left);
-                _alloc.deallocate(root, 1);
                 clear(root->right);
+                _alloc.deallocate(root, 1);                
             }
 
     };

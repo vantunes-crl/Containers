@@ -59,10 +59,11 @@ int main()
     bi.insert(make_pair(16, 'd'));
     bi.insert(make_pair(17, 'd'));
 
-    be.insert(make_pair(40, 'd'));
+    /* second tree */
     be.insert(make_pair(31, 'd'));
-    be.insert(make_pair(29, 'd'));
-    be.insert(make_pair(8, 'd'));
+    be.insert(make_pair(90, 'd'));
+    be.insert(make_pair(22, 'd'));
+    be.insert(make_pair(50, 'd'));
     //bi.swap(be);
 
     bi = be;
@@ -103,7 +104,9 @@ int main()
     // //std::cout << it->first << std::endl;
 
     //std::cout << bi.empty();
-    //std::cout << bi.size() << std::endl;
+    std::cout << bi.size() << std::endl;
+    std::cout << be.size() << std::endl;
+    
     for (it = bi.begin(); it != bi.end(); ++it)
         std::cout << it->first << it->second << std::endl;
 
