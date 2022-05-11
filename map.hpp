@@ -197,24 +197,23 @@ namespace ft
             /****************************************************** observers *****************************************/
 
 
-            
+            // in C++98, it is required to inherit binary_function<value_type,value_type,bool>
+            /*  Returns a comparison object that can be used to compare two elements to get whether the key of the first one goes before the second */
             class value_compare : std::binary_function<value_type, value_type, bool>
             {
                 protected:
                     key_compare comp;
                 public:
                     typedef bool result_type;
-                typedef value_type first_argument_type;
-                typedef value_type second_argument_type;
+                    typedef value_type first_argument_type;
+                    typedef value_type second_argument_type;
 
-                bool operator()(const value_type &x, const value_type &y) const
-                {
-                    return comp(x.first, y.first);
-                }
-                value_compare(const key_compare &c = key_compare()) : comp(c) {}
+                    bool operator()(const value_type &x, const value_type &y) const
+                    {
+                        return comp(x.first, y.first);
+                    }
+                    value_compare(const key_compare &c = key_compare()) : comp(c) {}
             };
-
-
 
             /* return key comparison object use std::less<Key> whith is the same of < but work with built-in types */
             key_compare key_comp() const
@@ -227,6 +226,41 @@ namespace ft
             {
                 return value_compare();
             }
+
+            /************************************************  Operations **************************************************/
+
+            /* find a element by key and return a iterator */
+            iterator find (const key_type &k)
+            {
+                return _root.findKey(k);
+            }
+
+            /* find a element by key and return a const iterator */
+            const_iterator find (const key_type &k) const
+            {
+                return _root.findKey(k);
+            }
+
+            /* Because all elements in a map container are unique, the function can only return 1 (if the element is found) or zero (otherwise). */
+            size_type count (const key_type& k) const
+            {
+                if(_root.findKey(k))
+                    return 1;
+                return 0;
+            }
+
+            iterator lower_bound (const key_type& k)
+            {
+                
+            }
+
+            const_iterator lower_bound (const key_type& k) const
+            {
+
+
+            }
+
+
 
 
             ~map() {}

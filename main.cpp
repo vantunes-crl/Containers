@@ -79,6 +79,9 @@ int main()
     it = bi.begin();
 
 
+    //std::cout << be.find(30)->second<< std::endl;
+
+
     //bi.erase(bi.begin(), bi.end());
     // map<int, char> be;
 
