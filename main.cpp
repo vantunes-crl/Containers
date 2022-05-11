@@ -74,9 +74,9 @@ int main()
     // //auto p =  bi.insert(ft::make_pair(19, 'd'));
     // // std::cout << p.first->first << p.second << std::endl;
 
-    bi.clear();
+//    bi.clear();
     map<int, char>::iterator it;
-    //it = bi.begin();
+    it = bi.begin();
 
 
     //bi.erase(bi.begin(), bi.end());
@@ -108,9 +108,17 @@ int main()
     // std::cout << bi.size() << std::endl;
     // std::cout << be.size() << std::endl;
     
-    for (it = bi.begin(); it != bi.end(); ++it)
-        std::cout << it->first << it->second << std::endl;
+    // for (it = bi.begin(); it != bi.end(); ++it)
+    //     std::cout << it->first << it->second << std::endl;
 
+    // auto comp_func = bi.key_comp(); 
+
+    // bool after = comp_func(100, it->first);
+
+    // std::cout << after << std::endl;
+
+
+    //be.value_comp()(*it++, *be.begin());
     // for (auto i = 0; i != map.Size(); ++i)
     // {
     //     std::cout << it->first << it->second << std::endl;    

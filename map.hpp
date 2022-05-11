@@ -37,11 +37,13 @@ namespace ft
             /*********************************************** Constructors **********************************/
             /* default constructor */
             explicit map (const key_compare &comp = key_compare(), const allocator_type& alloc = allocator_type())
+            :_root(), _alloc(_root.getAllocator())
             {}
 
             /* Range constructor */
             template <class InputIterator>
             map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
+            :_root(), _alloc(_root.getAllocator())
             {
                 while (first != last)
                 {
@@ -192,11 +194,46 @@ namespace ft
                 return p.first->second;
             }
 
+            /****************************************************** observers *****************************************/
+
+
+            
+            class value_compare : std::binary_function<value_type, value_type, bool>
+            {
+                protected:
+                    key_compare comp;
+                public:
+                    typedef bool result_type;
+                typedef value_type first_argument_type;
+                typedef value_type second_argument_type;
+
+                bool operator()(const value_type &x, const value_type &y) const
+                {
+                    return comp(x.first, y.first);
+                }
+                value_compare(const key_compare &c = key_compare()) : comp(c) {}
+            };
+
+
+
+            /* return key comparison object use std::less<Key> whith is the same of < but work with built-in types */
+            key_compare key_comp() const
+            {
+                return key_compare();
+            }
+
+            /* return value comparation object */
+            value_compare value_comp() const
+            {
+                return value_compare();
+            }
+
 
             ~map() {}
 
         private:
             bst _root;
+            allocator_type _alloc;
 
     };
 }
