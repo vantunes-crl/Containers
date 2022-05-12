@@ -249,15 +249,48 @@ namespace ft
                 return 0;
             }
 
-            iterator lower_bound (const key_type& k)
+            iterator lower_bound(const key_type& k)
             {
-                
+                node curr = _root.getRoot();
+                node prev = nullptr;
+                key_compare comp;
+
+                while (curr != nullptr)
+                {
+                    if (comp(curr->data.first, k))
+                    {
+                        prev = curr;
+                        curr = curr->right;
+                    }
+                    else
+                    {
+                        prev = curr;
+                        curr = curr->left;
+                    }
+                }
+                return prev;
             }
 
-            const_iterator lower_bound (const key_type& k) const
+            const_iterator lower_bound(const key_type& k) const
             {
+                node curr = _root.getRoot();
+                node prev = nullptr;
+                key_compare comp;
 
-
+                while (curr != nullptr)
+                {
+                    if (comp(curr->data.first, k))
+                    {
+                        prev = curr;
+                        curr = curr->right;
+                    }
+                    else
+                    {
+                        prev = curr;
+                        curr = curr->left;
+                    }
+                }
+                return prev;
             }
 
 

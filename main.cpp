@@ -52,19 +52,19 @@ int main()
     bi.insert(make_pair(10, 'b'));
     bi.insert(make_pair(20, 'c'));
     bi.insert(make_pair(18, 'd'));
-    bi.insert(make_pair(30, 'd'));
-    bi.insert(make_pair(12, 't'));
-    bi.insert(make_pair(25, 'd'));
-    bi.insert(make_pair(8, 'd'));
-    bi.insert(make_pair(16, 'd'));
-    bi.insert(make_pair(17, 'd'));
+    // bi.insert(make_pair(30, 'd'));
+    // bi.insert(make_pair(12, 't'));
+    // bi.insert(make_pair(25, 'd'));
+    // bi.insert(make_pair(8, 'd'));
+    // bi.insert(make_pair(16, 'd'));
+    // bi.insert(make_pair(17, 'd'));
 
-    /* second tree */
-    be.insert(make_pair(31, 'd'));
-    be.insert(make_pair(90, 'd'));
-    be.insert(make_pair(22, 'd'));
-    be.insert(make_pair(50, 'd'));
-    bi.swap(be);
+    // /* second tree */
+    // be.insert(make_pair(31, 'd'));
+    // be.insert(make_pair(90, 'd'));
+    // be.insert(make_pair(22, 'd'));
+    // be.insert(make_pair(50, 'd'));
+    // bi.swap(be);
 
     //bi = be;
 
