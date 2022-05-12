@@ -251,6 +251,8 @@ namespace ft
 
             iterator lower_bound(const key_type& k)
             {
+                if (_root.findKey(k))
+                    return _root.findKey(k);
                 node curr = _root.getRoot();
                 node prev = nullptr;
                 key_compare comp;
@@ -272,10 +274,11 @@ namespace ft
 
             const_iterator lower_bound(const key_type& k) const
             {
+                if (_root.findKey(k))
+                    return _root.findKey(k);
                 node curr = _root.getRoot();
                 node prev = nullptr;
                 key_compare comp;
-
                 while (curr != nullptr)
                 {
                     if (comp(curr->data.first, k))
