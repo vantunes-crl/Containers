@@ -254,14 +254,18 @@ namespace ft
                 node curr = _root.getRoot();
                 node prev = nullptr;
                 key_compare comp;
-
                 while (curr != nullptr)
                 {
-                    prev = curr;
                     if (comp(curr->data.first, k))
+                    {
+                        prev = curr;
                         curr = curr->right;
+                    }
                     else
+                    {
+                        prev = curr;
                         curr = curr->left;
+                    }
                 }
                 return prev;
             }
@@ -274,11 +278,16 @@ namespace ft
 
                 while (curr != nullptr)
                 {
-                    prev = curr;
                     if (comp(curr->data.first, k))
+                    {
+                        prev = curr;
                         curr = curr->right;
+                    }
                     else
+                    {
+                        prev = curr;
                         curr = curr->left;
+                    }
                 }
                 return prev;
             }
