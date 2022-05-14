@@ -1,8 +1,21 @@
 #include "map.hpp"
+#include <map>
 #include <iostream>
 
 using namespace ft;
- 
+
+
+//  _M_lower_bound(_Link_type __x, _Base_ptr __y,
+// 		   const _Key& __k)
+//     {
+//       while (__x != 0)
+// 	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+// 	  __y = __x, __x = _S_left(__x);
+// 	else
+// 	  __x = _S_right(__x);
+//       return iterator(__y);
+//     }
+
 int main()
 {
  

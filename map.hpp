@@ -248,56 +248,88 @@ namespace ft
                     return 1;
                 return 0;
             }
-
+            
+            /*  Returns an iterator pointing to the first element in the container whose key is not considered to go before k */
             iterator lower_bound(const key_type& k)
             {
-                if (_root.findKey(k))
-                    return _root.findKey(k);
-                node curr = _root.getRoot();
-                node prev = nullptr;
                 key_compare comp;
-                while (curr != nullptr)
+                iterator it = begin();
+
+                while (it != end())
                 {
-                    if (comp(curr->data.first, k))
-                    {
-                        prev = curr;
-                        curr = curr->right;
-                    }
-                    else
-                    {
-                        prev = curr;
-                        curr = curr->left;
-                    }
+                    if (!comp(it->first, k))
+                        break;
+                    ++it;
                 }
-                return prev;
+                if (it == end())
+                    it = _root.getMaxKey(_root.getRoot());
+                return it;
             }
 
             const_iterator lower_bound(const key_type& k) const
             {
-                if (_root.findKey(k))
-                    return _root.findKey(k);
-                node curr = _root.getRoot();
-                node prev = nullptr;
                 key_compare comp;
-                while (curr != nullptr)
+                iterator it = begin();
+
+                while (it != end())
                 {
-                    if (comp(curr->data.first, k))
-                    {
-                        prev = curr;
-                        curr = curr->right;
-                    }
-                    else
-                    {
-                        prev = curr;
-                        curr = curr->left;
-                    }
+                    if (!comp(it->first, k))
+                        break;
+                    ++it;
                 }
-                return prev;
+                if (it == end())
+                    it = _root.getMaxKey(_root.getRoot());
+                return it;
             }
 
+            /* Returns an iterator pointing to the first element in the container whose key is considered to go after k */
+            iterator upper_bound(const key_type& k)
+            {
+                key_compare comp;
+                iterator it = begin();
 
+                while (it != end())
+                {
+                    if (comp(it->first, k))
+                        break;
+                    ++it;
+                }
+                if (it == end())
+                    it = _root.getMaxKey(_root.getRoot());
+                return it;
+            }
+            
 
+            const_iterator upper_bound(const key_type& k) const
+            {
+                key_compare comp;
+                iterator it = begin();
 
+                while (it != end())
+                {
+                    if (comp(it->first, k))
+                        break;
+                    ++it;
+                }
+                if (it == end())
+                    it = _root.getMaxKey(_root.getRoot());
+                return it;
+            }
+
+            /* Returns the bounds of a range that includes all the elements in the container which have a key equivalent to k.*/
+            pair<iterator,iterator> equal_range(const key_type& k)
+            {
+                return (pair<iterator, iterator>(lower_bound(k), upper_bound(k)));
+            }
+
+            pair<const_iterator, const_iterator> equal_range(const key_type &k) const
+            {
+                return (pair<const_iterator, const_iterator>(lower_bound(k), upper_bound(k)));
+            }
+
+            allocator_type get_allocator() const 
+            {return _alloc;}
+            
             ~map() {}
 
         private:
