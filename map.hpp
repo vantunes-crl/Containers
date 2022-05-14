@@ -37,14 +37,19 @@ namespace ft
             /*********************************************** Constructors **********************************/
             /* default constructor */
             explicit map (const key_compare &comp = key_compare(), const allocator_type& alloc = allocator_type())
-            :_root(), _alloc(_root.getAllocator())
-            {}
+            :_root(), _alloc(alloc)
+            {
+                _alloc = _root.getAllocator();
+                _comp = comp;
+            }
 
             /* Range constructor */
             template <class InputIterator>
             map(InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
-            :_root(), _alloc(_root.getAllocator())
+            :_root(), _alloc(alloc)
             {
+                _alloc = _root.getAllocator();
+                _comp = comp;
                 while (first != last)
                 {
                     this->insert(make_pair(first->first, first->second));
@@ -83,6 +88,7 @@ namespace ft
             /* insert and return a iterator to the position */
             iterator insert (iterator position, const value_type &val)
             {
+                position;
                 pair<iterator, bool> p = insert(val);
                 return p.first;
             }
@@ -335,7 +341,7 @@ namespace ft
         private:
             bst _root;
             allocator_type _alloc;
-
+            key_compare _comp;
     };
 }
 
