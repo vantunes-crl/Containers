@@ -13,7 +13,7 @@ int main()
     
     //print(vec);
     std::cout << "--------------------\n";
-    //vec.assign(vec2.begin(), vec2.end());
+    vec.assign(vec2.begin(), vec2.end());
 
     vec = vec2;
     print(vec);

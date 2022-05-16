@@ -5,6 +5,10 @@
 #include <iterator>
 #include <type_traits>
 #include <utility>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <streambuf>
 
 #define TYPE int
 #ifndef NAMESPACE
@@ -13,19 +17,30 @@
 
 
 template <class T>
-void print(ft::vector<T> &vec)
+std::string print(ft::vector<T> &vec)
 {    
     typename ft::vector<T>::iterator it;
+    
+    std::stringstream ss;
+    std::streambuf * old_buf = std::cout.rdbuf(ss.rdbuf());
 
     for (it = vec.begin(); it != vec.end(); ++it)
-        std::cout << *it << std::endl;
+        std::cout << *it;
+
+    std::cout.rdbuf(old_buf);
+    return ss.str();
 }
 
 template <class T>
-void print(std::vector<T> &vec)
+std::string print(std::vector<T> &vec)
 {    
     typename std::vector<T>::iterator it;
+    std::stringstream ss;
+    std::streambuf * old_buf = std::cout.rdbuf(ss.rdbuf());
 
     for (it = vec.begin(); it != vec.end(); ++it)
-        std::cout << *it << std::endl;
+        std::cout << *it;
+
+    std::cout.rdbuf(old_buf);
+    return ss.str();
 }
