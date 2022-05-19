@@ -50,10 +50,11 @@ namespace ft
 
             template <class InputIterator>
             vector (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last, const allocator_type &allocate = allocator_type())
-            :_alloc(allocate)
+            :_alloc(allocate), _capacity(0), _size(0)
             {
                 InputIterator start = first;
                 InputIterator end = last;
+
                 int range = 0;
                 while (start++ != end)
                     range++;
@@ -66,6 +67,7 @@ namespace ft
                     i++;
                     _size++;
                     _capacity++;
+                    
                 }
             }
 
@@ -147,7 +149,7 @@ namespace ft
 
             /* --------------------------------------------------------------------Destructor---------------------------------------------------------------------------*/
             /*Deallocate all data from vector*/
-            ~vector() 
+            virtual ~vector() 
             {
                 for (size_t i = 0; i < _capacity; ++i)
                     _alloc.destroy(&_vector[i]);
@@ -318,7 +320,6 @@ namespace ft
                 while (_size > 0)
                 {
                     pop_back();
-                    _size--;
                 }    
             }
 

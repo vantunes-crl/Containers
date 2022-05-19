@@ -12,7 +12,7 @@
 #include <streambuf>
 
 #define START_TIME _clock = clock();
-#define FINISH_TIME double(clock() - _clock) / double(CLOCKS_PER_SEC);
+#define FINISH_TIME double(clock() - _clock) / double(CLOCKS_PER_SEC / 1000);
 #define GREEN "\033[1;32m"
 #define RED "\033[1;31m"
 #define END "\033[0m"
@@ -50,15 +50,16 @@ class vector_test
         void result(std::string name)
         {
             log << compare(_result.s1, _result.s2);
-            log << name << '\n';
+            log << name;
+            log << "  " << _result.time1 << "  " << _vec.capacity() << "\n";
             if (_result.error)
-                printf("%5.10s%-10s %10s %11sError%10s", YELLOW, name.c_str(), END, RED, END);
+                printf("%s%-20s %10s %12.20sError %s", YELLOW, name.c_str(), END, RED, END);
             else
-                printf("%5.10s%-10s %10s %10sPassed%10s", YELLOW, name.c_str(), END, GREEN, END);
+                printf("%s%-20s %10s %12.20sPassed%s", YELLOW, name.c_str(), END, GREEN, END);
             if (_result.time2 > (_result.time1 * 3))
-                printf("%s %5f %s", RED, _result.time2, END);
+                printf("%s %15f %s", RED, _result.time2, END);
             else
-                printf("%s %5f %s", GREEN, _result.time2, END);
+                printf("%s %15f %s", GREEN, _result.time2, END);
             if (_vec.capacity() != _ft_vec.capacity())
                 printf("%s %-10zu %s", RED, _ft_vec.capacity(), END);
             else
@@ -116,7 +117,7 @@ class vector_test
         /************ Constructors ************/
         vector_test()
         {
-            std::cout << "Test" << std::setw(21) << "Diff" << std::setw(13) << "Time"
+            std::cout << "Test" << std::setw(33) << "Diff" << std::setw(14) << "Time"
             <<  std::setw(14) << "Capacity" <<  std::setw(8) << "Size" << std::endl;
         }
 
@@ -193,7 +194,7 @@ class vector_test
             _result.time2 = FINISH_TIME;
 
             print();
-            result("AssingRgn");
+            result("Assing_Range");
             _result.clear();
         }
 
@@ -230,6 +231,171 @@ class vector_test
             if (test1 != test2)
                 _result.error = true;
             result("At");
+            _result.clear();
+        }
+
+        void Back()
+        {
+            auto test1 = 0;
+            auto test2 = 0;
+
+            START_TIME;
+            test1 = _vec.back();
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            test2 = _ft_vec.back();
+            _result.time2 = FINISH_TIME;
+
+            if (test1 != test2)
+                _result.error = true;
+            result("Back");
+            _result.clear();
+        }
+
+        void Front()
+        {
+            auto test1 = 0;
+            auto test2 = 0;
+
+            START_TIME;
+            test1 = _vec.front();
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            test2 = _ft_vec.front();
+            _result.time2 = FINISH_TIME;
+
+            if (test1 != test2)
+                _result.error = true;
+            result("Front");
+            _result.clear();
+
+        }
+
+        void Clear()
+        {
+
+            START_TIME;
+            _vec.clear();
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_vec.clear();
+            _result.time2 = FINISH_TIME;
+
+            result("Clear");
+            _result.clear();
+
+        }
+
+        void Erase()
+        {
+            START_TIME;
+            _vec.erase(_vec.begin() + 2);
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_vec.erase(_ft_vec.begin() + 2);
+            _result.time2 = FINISH_TIME;
+
+            result("Erase");
+            _result.clear();
+        }
+
+        void EraseRange()
+        {
+            START_TIME;
+            _vec.erase(_vec.begin(), _vec.end());
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_vec.erase(_ft_vec.begin(), _ft_vec.end());
+            _result.time2 = FINISH_TIME;
+
+            result("Erase_Range");
+            _result.clear();
+        }
+
+        void InsertRange()
+        {
+            ft::vector<T> temp1(10,15);
+            std::vector<T> temp2(10,15);
+
+            START_TIME;
+            _vec.insert(_vec.begin(), temp2.begin(), temp2.end());
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_vec.insert(_ft_vec.begin(), temp2.begin(), temp2.end());
+            _result.time2 = FINISH_TIME;
+
+            result("Insert_Range");
+            _result.clear();
+
+            
+        }
+
+        void InsertPosRgn()
+        {
+            START_TIME;
+             _vec.insert(_vec.begin(), 10, 49);
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_vec.insert(_ft_vec.begin(), 10, 49);
+            _result.time2 = FINISH_TIME;
+
+            result("Insert_Pos_Range");
+            _result.clear();
+           
+        }
+
+        void Insert()
+        {
+             START_TIME;
+             _vec.insert((_vec.begin()), 10);
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_vec.insert((_ft_vec.begin()), 10);
+            _result.time2 = FINISH_TIME;
+
+            result("Insert");
+            _result.clear();
+        }
+
+        void Contructors()
+        {
+            START_TIME;
+            std::vector<T> temp1(10,5);
+            _vec = temp1;
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            ft::vector<T> temp2(10,5);
+            _ft_vec = temp2;
+            _result.time2 = FINISH_TIME;
+
+            result("Constructor");
+            _result.clear();
+        }
+
+        void Contructor_Range()
+        {
+            std::vector<T> temp1(10,5);
+            START_TIME;
+            std::vector<T> temp3(temp1.begin(), temp1.end());
+            _vec = temp3;
+            _result.time1 = FINISH_TIME;
+
+            ft::vector<T> temp2(10,5);
+            START_TIME;
+            ft::vector<T> temp4(temp2.begin(), temp2.end());
+            _ft_vec = temp4;
+            _result.time2 = FINISH_TIME;
+
+            result("Constructor_Range");
             _result.clear();
         }
 

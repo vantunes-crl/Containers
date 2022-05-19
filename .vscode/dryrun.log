@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/vantunes/Desktop/Containers'
+make: Leaving directory '/home/vantunes/Desktop/Containers'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
