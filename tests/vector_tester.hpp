@@ -13,8 +13,8 @@
 
 #define START_TIME _clock = clock();
 #define FINISH_TIME double(clock() - _clock) / double(CLOCKS_PER_SEC / 1000);
-#define VECTOR std::vector<T>
-#define FT_VECTOR ft::vector<T>
+#define VECTOR std::vector<T> vec;
+#define FT_VECTOR ft::vector<T> ft_vec;
 #define GREEN "\033[1;32m"
 #define RED "\033[1;31m"
 #define END "\033[0m"
