@@ -13,6 +13,8 @@
 
 #define START_TIME _clock = clock();
 #define FINISH_TIME double(clock() - _clock) / double(CLOCKS_PER_SEC / 1000);
+#define VECTOR std::vector<T>
+#define FT_VECTOR ft::vector<T>
 #define GREEN "\033[1;32m"
 #define RED "\033[1;31m"
 #define END "\033[0m"
@@ -270,7 +272,6 @@ class vector_test
                 _result.error = true;
             result("Front");
             _result.clear();
-
         }
 
         void Clear()
@@ -286,7 +287,6 @@ class vector_test
 
             result("Clear");
             _result.clear();
-
         }
 
         void Erase()
@@ -333,7 +333,6 @@ class vector_test
             result("Insert_Range");
             _result.clear();
 
-            
         }
 
         void InsertPosRgn()
@@ -398,8 +397,6 @@ class vector_test
             result("Constructor_Range");
             _result.clear();
         }
-
-
 
         
         ~vector_test() {
