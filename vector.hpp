@@ -218,42 +218,48 @@ namespace ft
             /*insert a element at the iterator position, @ret a iterator to the new pos*/
             iterator insert(iterator position, const value_type &val)
             {
-                int count = 0;
-                while (position != end())
+                size_t pos = begin() - position;
+                pointer temp;
+                if (++_size > _capacity)
+                    temp = _alloc.allocate(_capacity *= 2);
+                else
+                    temp = _alloc.allocate(_capacity);
+                int i = 0;
+                while (i < _size)
                 {
-                    position++;
-                    count++;
+                    if (i == pos)
+                        temp[i++] = val;
+                    temp[i] = _vector[i];
+                    ++i;
                 }
-                push_back(val);
-                int size_cpy = _size;
-                while (count--)
-                {
-                    swap(_vector[size_cpy - 2], _vector[size_cpy - 1]);
-                    size_cpy--;
-                }
-                return iterator(&_vector[size_cpy - 1]);
+                this->~vector();
+                _vector = temp;
+                return iterator(&_vector[pos]);
             }
 
             /* insert n elements in the vector pos @no ret */
             void insert (iterator position, size_type n, const value_type& val)
             {
-                int count = 0;
-                while (position != end())
+                size_t pos = begin() - position;
+                pointer temp;
+                if  ((_size += n) > _capacity)
                 {
-                    position++;
-                    count++;
+                    while ((_size += n) > _capacity)
+                        temp = _alloc.allocate(_capacity *= 2);
                 }
-                while (n--)
+                else
+                    temp = _alloc.allocate(_capacity);
+                int i, j = 0;
+                while (i < _size)
                 {
-                    push_back(val);
-                    int size_cpy = _size;
-                    int count_cpy = count;
-                    while (count_cpy--)
-                    {
-                        swap(_vector[size_cpy - 2], _vector[size_cpy - 1]);
-                        size_cpy--;
-                    }
+                    if (i == pos)
+                        ++i;
+                    temp[j] = _vector[i];
+                    ++j;
+                    ++i;
                 }
+                this->~vector();
+                _vector = temp;
             }
 
             /* insert n elements in the vector from a range of elements from first to last */
@@ -283,9 +289,24 @@ namespace ft
             /* erase a element in the vector and return the new pos */
             iterator erase (iterator position)
             {
-                _alloc.destroy(&position);
-                _size--;
-                return iterator(position);
+                size_t pos = position - begin();
+
+                pointer temp;
+                temp = _alloc.allocate(_capacity);
+                int i, j = 0;
+                while (i < _size)
+                {
+                    if (iterator(&_vector[i]) == position)
+                        ++i;
+                    temp[j] = _vector[i];
+                    ++j;
+                    ++i;
+                }
+                this->~vector();
+                _vector = temp;
+                --_size;
+
+                return iterator(&_vector[pos]);
             }
 
             /* erase a n of elements from the first iterator to the last */
@@ -307,31 +328,42 @@ namespace ft
             /* clear all the elements in vector */
             void clear()
             {
-                erase(begin(), end());
+                while (_size)
+                    pop_back();
             }
 
             /* assign new values to the container*/
             template <class InputIterator>
             void assign (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last)
             {
-                _alloc.deallocate(_vector, _capacity);
-                _size = last - first;
-                int i = 0;
+                this->~vector();
+                _size = 0;
                 _vector = _alloc.allocate(_capacity);
-                while (i < _size)
+                while (first != last)
                 {
-                    _vector[i] = *first;
+                    _vector[_size] = *first;
                     ++first;
-                    ++i;
+                    ++_size;
                 }
             }
 
             /* assign new values to the container*/
             void assign (size_type n, const value_type &val)
             {
-                clear();
-                while (n--)
-                    push_back(val);
+                if (n > _capacity)
+                {
+                    _vector = _alloc.allocate(n);
+                    _capacity = n;
+                }
+                else
+                    clear();
+                int i = 0;
+                while (i < n)
+                {
+                    _vector[i] = val;
+                    ++i;     
+                }
+                _size = n;
             }
 
             void swap (vector &x)
