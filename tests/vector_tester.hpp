@@ -181,7 +181,7 @@ class vector_test
         {
             std::vector<T> temp1;
             ft::vector<T> temp2;
-            for (int i = 0; i < 500; ++i)
+            for (int i = 0; i < 400; ++i)
             {
                 temp1.push_back(i);
                 temp2.push_back(i);
@@ -208,12 +208,27 @@ class vector_test
             _result.time1 = FINISH_TIME;
 
             START_TIME;
-            _ft_vec.resize(_vec.size() + 500);
-            _ft_vec.resize(_vec.size() - 250);
+            _ft_vec.resize(_ft_vec.size() + 500);
+            _ft_vec.resize(_ft_vec.size() - 250);
             _result.time2 = FINISH_TIME;
-
             print();
             result("Resize");
+            _result.clear();
+        }
+
+        void Reserve()
+        {
+             START_TIME;
+            _vec.reserve(_vec.size() + 500);
+            _vec.reserve(_vec.size() - 250);
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_vec.reserve(_ft_vec.size() + 500);
+            _ft_vec.reserve(_ft_vec.size() - 250);
+            _result.time2 = FINISH_TIME;
+            print();
+            result("Reserve");
             _result.clear();
         }
 

@@ -82,6 +82,11 @@ namespace ft
             random_access_iterator  operator-(difference_type n)
             {return (_container_ptr - n);}
 
+            difference_type operator-(const random_access_iterator &obj2) const
+            {
+                return (_container_ptr - obj2._container_ptr);
+            }
+
             random_access_iterator operator-=(difference_type n)
             {return _container_ptr -= n;}
 

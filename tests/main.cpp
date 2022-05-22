@@ -8,8 +8,8 @@ int main(int argc, char **argv)
     test.Contructors();
     test.Contructor_Range();
     test.Push_back();
-    //test.Resize();
-    //test.Reserve();
+    test.Resize();
+    test.Reserve();
     test.Pop_back();
     test.At();
     test.Back();

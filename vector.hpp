@@ -117,7 +117,6 @@ namespace ft
             size_type max_size() const
             {return _alloc.max_size();}
 
-           
 
             /*increase the capacity of vector*/
             void reserve(size_type reserve_value)
@@ -133,10 +132,16 @@ namespace ft
             /*Resize the vector*/
             void resize(size_type new_size, value_type val = value_type())
             {
-                while (new_size > _size)
-                    push_back(val);
-                while (new_size < _size)
-                    pop_back();
+                if (new_size > _capacity)
+                {
+                    increaseVector(new_size);
+                    _size = new_size;
+                }
+                else
+                {
+                    while (_size != new_size)
+                        _alloc.destroy(&_vector[_size--]);
+                }
             }
             
             /*@ret capacity of vector*/
@@ -278,58 +283,47 @@ namespace ft
             /* erase a element in the vector and return the new pos */
             iterator erase (iterator position)
             {
-                int count = 0;
-                while (position != begin())
-                {
-                    position--;
-                    count++;
-                }
-                int count_cpy = count;
-                while (count < _size - 1)
-                {
-                    swap(_vector[count], _vector[count + 1]);
-                    count++;
-                }
-                pop_back();
-                return iterator(&_vector[count_cpy]);
+                _alloc.destroy(&position);
+                _size--;
+                return iterator(position);
             }
 
             /* erase a n of elements from the first iterator to the last */
             iterator erase (iterator first, iterator last)
             {
-                size_type range = 0;
-                size_type pos = 0;
-                while (first-- != begin())
-                    pos++;
-                first = first + pos;
-                while (first++ != last)
-                    range++;
-                for (int i = range; i > 0; --i)
-                {
-                    for (int i = pos; i < _size; ++i)
-                        swap(_vector[i], _vector[i + 1]);
-                }
+                int i = 0;
+                size_t range = last - first;
+                while (iterator(&_vector[i]) != first)
+                    ++i;
                 while (range--)
-                    pop_back();
-                return iterator(&_vector[pos]);
+                {
+                    _alloc.destroy(&_vector[i]);
+                    --_size;
+                    ++i;
+                }
+                return iterator(&_vector[i]);
             }
 
-            /* clear the holy vector */
+            /* clear all the elements in vector */
             void clear()
             {
-                while (_size > 0)
-                {
-                    pop_back();
-                }    
+                erase(begin(), end());
             }
 
             /* assign new values to the container*/
             template <class InputIterator>
             void assign (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last)
             {
-                clear();
-                while (first != last)
-                    push_back(*(first)++);
+                _alloc.deallocate(_vector, _capacity);
+                _size = last - first;
+                int i = 0;
+                _vector = _alloc.allocate(_capacity);
+                while (i < _size)
+                {
+                    _vector[i] = *first;
+                    ++first;
+                    ++i;
+                }
             }
 
             /* assign new values to the container*/
