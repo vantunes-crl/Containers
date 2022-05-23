@@ -43,7 +43,7 @@ class vector_test
     } t_result;
 
     private:
-        std::ofstream log{ "Logs"};
+        std::ofstream log{ "Logs.txt"};
         t_result _result;
         VECTOR *_vec = nullptr;
         FT_VECTOR *_ft_vec = nullptr;
@@ -83,9 +83,15 @@ class vector_test
                 if (a[i] != b[i])
                 {
                     if (a[i])
+                    {
                         diff.push_back(a[i]);
+                        diff.push_back(' ');
+                    }
                     else
+                    {
                         diff.push_back(b[i]);
+                        diff.push_back(' ');
+                    }
                     _result.error = true;
                 }
                 ++i;
@@ -131,11 +137,11 @@ class vector_test
             _vec = new VECTOR;
             _ft_vec = new FT_VECTOR;
 
-            for (int i = 0; i < 55; ++i)
+            for (int i = 0; i < 500; ++i)
             {
-                int rd = rand() % 55 + 1;
-                _vec->push_back(rd);
-                _ft_vec->push_back(rd);
+                //int rd = rand() % 10 + 1;
+                _vec->push_back(i);
+                _ft_vec->push_back(i);
             }
 
         }
@@ -368,11 +374,11 @@ class vector_test
         {
             init();
             START_TIME;
-            _vec->erase(_vec->begin(), _vec->end() - 3);
+            _vec->erase(_vec->begin(), _vec->end() - 4);
             _result.time1 = FINISH_TIME;
 
             START_TIME;
-            _ft_vec->erase(_ft_vec->begin(), _ft_vec->end() - 3);
+            _ft_vec->erase(_ft_vec->begin(), _ft_vec->end() - 4);
             _result.time2 = FINISH_TIME;
 
             print();

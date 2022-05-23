@@ -4,15 +4,15 @@
 
 int main()
 {
-    std::vector<int> vec;
+    ft::vector<int> vec;
 
 
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 500; ++i)
     {
         vec.push_back(i);
     }
 
-    vec.erase(vec.begin() + 2);
+    vec.assign(20,50);
 
     for (auto it = vec.begin(); it != vec.end(); ++it)
         std::cout << *it << " ";
