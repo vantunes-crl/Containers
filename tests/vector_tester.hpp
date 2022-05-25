@@ -11,6 +11,7 @@
 #include <sstream>
 #include <streambuf>
 
+#define SIZE_VECTOR 150
 #define START_TIME _clock = clock();
 #define FINISH_TIME double(clock() - _clock) / double(CLOCKS_PER_SEC / 1000);
 #define VECTOR std::vector<T>
@@ -137,7 +138,7 @@ class vector_test
             _vec = new VECTOR;
             _ft_vec = new FT_VECTOR;
 
-            for (int i = 0; i < 100; ++i)
+            for (int i = 0; i < SIZE_VECTOR; ++i)
             {
                 //int rd = rand() % 10 + 1;
                 _vec->push_back(i);
