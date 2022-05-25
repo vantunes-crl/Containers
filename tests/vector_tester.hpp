@@ -137,7 +137,7 @@ class vector_test
             _vec = new VECTOR;
             _ft_vec = new FT_VECTOR;
 
-            for (int i = 0; i < 500; ++i)
+            for (int i = 0; i < 100; ++i)
             {
                 //int rd = rand() % 10 + 1;
                 _vec->push_back(i);
