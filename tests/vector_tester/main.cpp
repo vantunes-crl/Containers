@@ -1,5 +1,4 @@
 #include "vector_tester.hpp"
-#include "../vector.hpp"
 
 int main(int argc, char **argv)
 {
@@ -22,6 +21,4 @@ int main(int argc, char **argv)
     test.Insert();
     test.InsertPosRgn();
     test.InsertRange();
-    
-
 }

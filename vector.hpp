@@ -250,30 +250,22 @@ namespace ft
                     temp = _alloc.allocate(_capacity);
                 }
                 else
-                {
-                    temp = _alloc.allocate(_capacity + 7);
-                }
+                    temp = _alloc.allocate(_capacity);
+
                 int i, j;
                 i = j = 0;
-                int count = 0;
-                while (i < _size)
+                while (i < _size - n)
                 {
                     if (i == pos)
                     {
-                        int range = n + j;
-                        while (j < range)
-                        {
+                        int it = n;
+                        while (it--)
                             temp[j++] = val;
-                            count++;
-                        }
                     }
                     _alloc.construct(&temp[j], _vector[i]);
-                    ++j; 
-                    ++i;
-                    ++count;
+                    ++j; ++i;
                 }
-                this->~vector();
-                std::cout << count << std::endl;
+                _alloc.deallocate(_vector, _capacity);
                 _vector = temp;
             }
 
@@ -288,9 +280,10 @@ namespace ft
                     temp = _alloc.allocate(_capacity *= 2);
                 else
                     temp = _alloc.allocate(_capacity);
+
                 int i, j;
                 i = j = 0;
-                while (i < _size)
+                while (i < _size - range)
                 {
                     if (i == pos)
                     {
@@ -303,7 +296,7 @@ namespace ft
                     _alloc.construct(&temp[j], _vector[i]);
                     ++j; ++i;
                 }
-                this->~vector();
+                _alloc.deallocate(_vector, _capacity);
                 _vector = temp;
             }
 
@@ -452,7 +445,7 @@ namespace ft
                 pointer tmp = _alloc.allocate(size);
                 for (size_type i = 0; i < _size; ++i)
                     _alloc.construct(&tmp[i], _vector[i]);
-                this->~vector();
+                _alloc.deallocate(_vector, _capacity);
                 _vector = tmp;
                 if (_capacity == 1)
                     ++_capacity;

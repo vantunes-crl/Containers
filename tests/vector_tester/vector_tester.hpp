@@ -2,7 +2,7 @@
 #define VECTOR_TESTER_HPP
 
 #include <vector>
-#include "../vector.hpp"
+#include "../../vector.hpp" //path to  vector
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -482,7 +482,6 @@ class vector_test
             result("Constructor_Range");
             _result.clear();
         }
-
         
         ~vector_test() {
             log.close();
