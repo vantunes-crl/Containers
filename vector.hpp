@@ -366,7 +366,6 @@ namespace ft
             {
                 this->~vector();
                 _size = 0;
-                size_t range = last - first;
                 _vector = _alloc.allocate(_capacity);
                 while (first != last)
                 {
