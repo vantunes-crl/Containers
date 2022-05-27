@@ -4,7 +4,7 @@
 #include <map>
 #include "map.hpp"
 
-using namespace ft;
+using namespace std;
 
 int main()
 {
@@ -46,7 +46,7 @@ int main()
 
     //std::cout << "my binary tree---------------------\n\n";
     map<int, char> bi;
-    map<int, char> be;
+    //map<int, char> be;
     
     bi.insert(make_pair(15, 'a'));
     bi.insert(make_pair(10, 'b'));
@@ -76,8 +76,9 @@ int main()
 
 //    bi.clear();
     map<int, char>::iterator it;
-    it = bi.begin();
+    it = bi.end();
 
+    std::cout << it->second << std::endl;
 
     //std::cout << be.find(30)->second<< std::endl;
 

@@ -157,6 +157,125 @@ class map_tester
             _result.clear();
         }
 
+        void InserRange()
+        {
+            init();
+
+            FT_MAP temp1 = *_ft_map;
+            MAP temp2 = *_map;
+
+            START_TIME;
+            _map->insert(temp2.begin(), temp2.end());
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_map->insert(temp1.begin(), temp1.end());
+            _result.time2 = FINISH_TIME;
+
+            print();
+            result("InserRange");
+            _result.clear();
+        }
+
+        void ConstructorRangeAssignOperator()
+        {
+            init();
+
+            FT_MAP temp1 = *_ft_map;
+            MAP temp2 = *_map;
+
+            if(_ft_map)
+                delete _ft_map;
+            if (_map)
+                delete _map;
+            START_TIME;
+            _map = new MAP(temp2.begin(), temp2.end());
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_map = new FT_MAP(temp1.begin(), temp1.end());
+            _result.time2 = FINISH_TIME;
+
+            print();
+            result("CtorAssignOperator");
+            _result.clear();
+        }
+
+        void Erase()
+        {
+            init();
+            START_TIME;
+            _map->erase(10);
+            _map->erase(20);
+            _map->erase(35);
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_map->erase(10);
+            _ft_map->erase(20);
+            _ft_map->erase(35);
+            _result.time2 = FINISH_TIME;
+
+            print();
+            result("Erase");
+            _result.clear();
+        }
+
+
+        void EraseIterator()
+        {
+            init();
+            START_TIME;
+            _map->erase(_map->begin());
+            _map->erase(_map->begin());
+            _map->erase(_map->begin());
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_map->erase(_ft_map->begin());
+            _ft_map->erase(_ft_map->begin());
+            _ft_map->erase(_ft_map->begin());
+            _result.time2 = FINISH_TIME;
+
+            print();
+            result("EraseIterator");
+            _result.clear();
+
+        }
+
+        void EraseRange()
+        {
+            init();
+            START_TIME;
+            _map->erase(_map->begin(), _map->end());
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_map->erase(_ft_map->begin(), _ft_map->end());
+            _result.time2 = FINISH_TIME;
+
+            print();
+            result("EraseRange");
+            _result.clear();
+
+        }
+
+        void Clear()
+        {
+             init();
+            START_TIME;
+            _map->clear();
+            _result.time1 = FINISH_TIME;
+
+            START_TIME;
+            _ft_map->clear();
+            _result.time2 = FINISH_TIME;
+
+            print();
+            result("Clear");
+            _result.clear();
+        }
+
         map_tester()
         {
             std::cout << "Test" << std::setw(33) << "Diff" << std::setw(14) << "Time"

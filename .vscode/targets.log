@@ -7,9 +7,8 @@ make: *** No rule to make target 'all'.  Stop.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
-# Make data base, printed on Thu May 19 12:25:28 2022
+# Make data base, printed on Fri May 27 12:13:14 2022
 
 # Variables
 
@@ -24,7 +23,7 @@ SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-b782e289-f68c-4df3-a926-47485ef199a5.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-9c088bf6-ea5a-496f-947d-b178f8de5e7b.sock
 # environment
 VSCODE_CWD = /home/vantunes/Desktop
 # environment
@@ -68,7 +67,7 @@ XAUTHORITY = /run/user/1000/gdm/Xauthority
 # default
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # environment
-GNOME_TERMINAL_SERVICE = :1.108
+GNOME_TERMINAL_SERVICE = :1.93
 # makefile
 MAKEFLAGS = pqrR
 # makefile
@@ -102,13 +101,13 @@ SNAP_REEXEC =
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 5446
+VSCODE_PID = 5481
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/vantunes-X556URK:@/tmp/.ICE-unix/1647,unix/vantunes-X556URK:/tmp/.ICE-unix/1647
+SESSION_MANAGER = local/vantunes-X556URK:@/tmp/.ICE-unix/1735,unix/vantunes-X556URK:/tmp/.ICE-unix/1735
 # automatic
 *F = $(notdir $*)
 # environment
@@ -132,7 +131,7 @@ XMODIFIERS = @im=ibus
 # environment
 SHLVL = 1
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/892c356a_104e_4260_9e26_f30387371494
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/bc6915d0_ba67_4ec2_8d59_52ea4cb9a2fb
 # environment
 MAKELEVEL := 0
 # default
@@ -180,7 +179,7 @@ SNAP_ARCH = amd64
 # makefile
 .DEFAULT_GOAL := 
 # environment
-SYSTEMD_EXEC_PID = 1866
+SYSTEMD_EXEC_PID = 1949
 # environment
 DISPLAY = :0
 # environment
@@ -253,13 +252,13 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 # Load=118/1024=12%, Rehash=0, Collisions=11/145=8%
 
 # Pattern-specific Variable Values
+ 
 
 # No pattern-specific variable values.
- 
 
 # Directories
 
-# . (device 2051, inode 6947088): 16 files, no impossibilities.
+# . (device 2051, inode 6815862): 16 files, no impossibilities.
 
 # 16 files, no impossibilities in 1 directories.
 
@@ -317,6 +316,6 @@ GNUmakefile:
 # strcache performance: lookups = 27 / hit rate = 11%
 # hash-table stats:
 # Load=24/8192=0%, Rehash=0, Collisions=0/27=0%
-# Finished Make data base on Thu May 19 12:25:28 2022
+# Finished Make data base on Fri May 27 12:13:14 2022
 
  

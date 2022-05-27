@@ -121,7 +121,6 @@ namespace ft
                     else
                         _root = nullptr;
                     _alloc.deallocate(curr, 1);
-                    --_size;
                 }
                 else if (curr->left && curr->right) // Case 2: node to be deleted has two children
                 {
