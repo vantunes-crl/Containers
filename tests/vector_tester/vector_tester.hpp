@@ -11,7 +11,7 @@
 #include <sstream>
 #include <streambuf>
 
-#define SIZE_VECTOR 150
+#define SIZE_VECTOR 100
 #define START_TIME _clock = clock();
 #define FINISH_TIME double(clock() - _clock) / double(CLOCKS_PER_SEC / 1000);
 #define VECTOR std::vector<T>

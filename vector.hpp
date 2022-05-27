@@ -134,7 +134,15 @@ namespace ft
             {
                 if (new_size > _capacity)
                 {
-                    increaseVector(new_size);
+                    int i = -1;
+                    pointer tmp = _alloc.allocate(new_size);
+                    while (++i < _size)
+                        _alloc.construct(&tmp[i], _vector[i]);
+                    while (i < new_size)
+                        _alloc.construct(&tmp[i++], val);
+                    _alloc.deallocate(_vector, _capacity);
+                    _vector = tmp;
+                    _capacity = new_size;
                     _size = new_size;
                 }
                 else
@@ -281,7 +289,7 @@ namespace ft
                 else
                     temp = _alloc.allocate(_capacity);
 
-                int i, j;
+                size_t i, j;
                 i = j = 0;
                 while (i < _size - range)
                 {
@@ -306,10 +314,11 @@ namespace ft
                 size_t pos = position - begin();
                 pointer temp;
                 temp = _alloc.allocate(_capacity);
-                int i, j = 0;
+                int i, j;
+                i = j = 0;
                 while (i < _size)
                 {
-                    if (iterator(&_vector[i]) == position)
+                    if (i == pos)
                         ++i;
                     temp[j] = _vector[i];
                     ++j;
@@ -356,8 +365,8 @@ namespace ft
             void assign (typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type first, InputIterator last)
             {
                 this->~vector();
-                int i = 0;
                 _size = 0;
+                size_t range = last - first;
                 _vector = _alloc.allocate(_capacity);
                 while (first != last)
                 {

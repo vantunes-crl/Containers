@@ -4,7 +4,7 @@
 #include <map>
 #include "map.hpp"
 
-using namespace std;
+using namespace ft;
 
 int main()
 {
@@ -32,7 +32,6 @@ int main()
     // --it;
     // --it;
     // --it;
-
 
     // std::cout << it->first << std::endl;
     // auto i = map.begin();
